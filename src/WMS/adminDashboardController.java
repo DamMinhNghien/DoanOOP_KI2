@@ -69,16 +69,21 @@ public class adminDashboardController implements Initializable{
     private Button tao_them_bang;
     
     @FXML
+    private Button BangDemo_btn;
+    
+    @FXML
     private Button logout;
     
     @FXML
     private AnchorPane board_form;
     
     @FXML
-    private MenuButton sap_xep_theo_btn;
+    private ComboBox<String> sap_xep_theo_btn;
+    ObservableList<String> list = FXCollections.observableArrayList("Hoạt động gần đây nhất","Ít hoạt động nhất","Theo bảng chữ cái A-Z","Theo bảng chữ cái Z-A");
+    
     
     @FXML
-    private MenuButton Chon_bo_suu_tap_btn;
+    private ComboBox<String> Chon_bo_suu_tap_btn;
     
     @FXML
     private TextField search_fied;
@@ -150,7 +155,8 @@ public class adminDashboardController implements Initializable{
     @FXML
     private Button employees_save;
     
-   
+   @FXML
+   private AnchorPane bangDemo_form;
 
 
     @FXML
@@ -252,6 +258,9 @@ public class adminDashboardController implements Initializable{
            }      
         }catch(Exception e){e.printStackTrace();}    
     }
+   // private String[]sap_xep_theo_btn ={"Hoạt động gần đây nhất","Ít hoạt động nhất","Theo bảng chữ cái A-Z","Theo bảng chữ cái Z-A"};
+    
+    
     
     private String[]genderList = {"Male","Female","Others"};
     public void employeesGender(){
@@ -493,12 +502,22 @@ public class adminDashboardController implements Initializable{
     
     
     }
+    public void dantoibang(ActionEvent event){
+    if (event.getSource()== BangDemo_btn){
+        board_form.setVisible(false);
+        employees_form.setVisible(false);
+        Calendar_form.setVisible(false); 
+        bangDemo_form.setVisible(true);
+        
+    }
+    }
     
     public void switchForm(ActionEvent event){
         if(event.getSource() == board_btn ){
             board_form.setVisible(true);
             employees_form.setVisible(false);
-            Calendar_form.setVisible(false); 
+            Calendar_form.setVisible(false);
+            bangDemo_form.setVisible(false);
             
             board_btn.setStyle("-fx-background-color:linear-gradient(to top right,#8825a1,#cf40f6);");
             employees_btn.setStyle("-fx-background-color:transparent");
@@ -507,6 +526,7 @@ public class adminDashboardController implements Initializable{
             board_form.setVisible(false);
             employees_form.setVisible(true);
             Calendar_form.setVisible(false);
+            bangDemo_form.setVisible(false);
             
             board_btn.setStyle("-fx-background-color:transparent");
             employees_btn.setStyle("-fx-background-color:linear-gradient(to top right,#8825a1,#cf40f6);");
@@ -518,6 +538,7 @@ public class adminDashboardController implements Initializable{
             board_form.setVisible(false);
             employees_form.setVisible(false);
             Calendar_form.setVisible(true);
+            bangDemo_form.setVisible(false);
             
             board_btn.setStyle("-fx-background-color:transparent");
             employees_btn.setStyle("-fx-background-color:transparent");
@@ -542,7 +563,7 @@ public class adminDashboardController implements Initializable{
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        sap_xep_theo_btn.setItems(list);
         displayUsername();
         employeesShowListData();
         employeesGender();
