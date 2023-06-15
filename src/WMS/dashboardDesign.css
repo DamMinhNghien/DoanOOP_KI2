@@ -1,0 +1,177 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 2, 2023, 7:20:19 AM
+    Author     : dangh
+*/
+.top-form{
+    -fx-background-color: #fff;
+    -fx-border-color:#000;
+    -fx-border-width: .4px .4px .2px .4px;
+}
+
+.semi-top-form{
+    
+   -fx-background-color: #efefef;
+   -fx-border-color:#000;
+   -fx-border-width: .2px .4px .8px .4px;
+}
+
+.nav-form{
+    -fx-background-color:linear-gradient(to top right, #752131, #8825a1);
+    
+}
+.close{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+    
+}
+.close:hover{
+    -fx-background-color:#dd2f4f;
+    
+}
+.minimize{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+.minimize:hover{
+    -fx-background-color:#ddd;
+}
+
+.white-bg{
+    -fx-background-color:#fff;
+    -fx-background-radius:8px;
+    
+}
+
+
+
+.shadown{
+    -fx-effect:dropshadow(three-pass-box,rgba(0,0,0,0.4),5,0,0,0);
+    
+}
+
+.textfield{
+    -fx-background-color:transparent;
+    -fx-background-radius: 0px 5px 0px 0px;
+    -fx-border-color:linear-gradient(to top right, #64522c, #a8962b);
+    -fx-border-width:0px 0px 1px 0px;
+    -fx-font-family:"Tahoma";
+    -fx-font-size: 13px;
+}
+.textfield:focused{
+    -fx-border-width:0px 0px 2px 0px;
+}
+
+
+.combobox{
+    
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to top right, #64522c, #a8962b);
+    -fx-border-width:1px;
+    -fx-font-family:"Tahoma";
+    -fx-font-size:13px;
+}
+.combobox:focused{
+    -fx-border-width:2px;
+    
+}
+.Symbol-WS{
+    -fx-background-color:linear-gradient(to top right, #752131, #8825a1);
+    -fx-background-radius: 5px 5px 5px 5px;
+    -fx-border-radius: 0px 5px 0px 0px;
+}
+.button-inpage{
+    -fx-background-radius:8px;
+    -fx-cursor:hand;
+    -fx-font-family:"Tahoma";   
+}
+.button-inpage:hover{
+    -fx-background-color:linear-gradient(to top right, #752131, #8825a1);
+}
+.button-outpage{
+    -fx-background-color:transparent;
+    -fx-border-color:transparent;
+    -fx-cursor:hand;
+ 
+}
+.button-outpage:hover{
+    -fx-background-color:transparent;
+}
+.table-view{
+    -fx-background-color:transparent;
+    -fx-border-color: linear-gradient(to top right, #752131, #8825a1);
+    -fx-border-width:2px;
+    -fx-border-radius:5px;
+    -fx-padding:0px;
+    
+    
+}
+.table-view .table-column{
+    -fx-alignment:CENTER;
+    
+    
+}
+.table-view .column-header-background{
+    -fx-background-color:linear-gradient(to top right, #752131, #8825a1);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 5px 5px 0px 0px;
+  
+}
+.table-view .column-header, .filter{
+    -fx-background-color:transparent;
+    -fx-size:50px;
+    
+}
+.table-view .column-header .label{
+    -fx-text-fill:#fff;
+    -fx-alignment:CENTER;
+}
+
+.labell-inpage{
+    -fx-text-fill:#000;
+}
+.welcomeadmin{
+    -fx-text-fill:#fff;
+}
+
+.search{
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to top right,#752131, #8825a1);
+    -fx-border-width:1px;
+    -fx-border-radius:5px;
+    -fx-padding:0px 0px 0px 28px;
+    -fx-font-size: 14px;
+}
+.search:focused{
+    -fx-border-width:2px;
+    -fx-border-color:linear-gradient(to top right,#752131, #8825a1);
+}
+
+
+.btn-create{
+    -fx-background-color:linear-gradient(to top right, #752131, #8825a1);
+    -fx-cursor:hand;
+    -fx-background-radius:8px;
+}
+.xemcacbangdadong{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+    -fx-background-radius:8px;
+    -fx-text-fill:#000;
+    -fx-font-family:"Tahoma";   
+    -fx-border-width:1px;
+    -fx-border-radius:5px;
+    -fx-border-color:linear-gradient(to top right,#752131, #8825a1);   
+}
+.xemcacbangdadong:hover{
+     -fx-background-color:transparent;
+}
+.xemcacbangdadong:focused{
+    -fx-background-color:transparent;
+}
+
+

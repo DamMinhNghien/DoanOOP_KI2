@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="673.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WMS.FXMLController">
+   <children>
+      <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane layoutX="46.0" layoutY="109.0" prefHeight="417.0" prefWidth="337.0" style="-fx-background-color: #263F73;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="336.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="110.0" layoutY="41.0" text="WMS">
+                     <font>
+                        <Font name="Corbel" size="60.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.8245614171028137" green="0.15015161037445068" blue="0.061078622937202454" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Line endX="100.0" layoutX="178.0" layoutY="127.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
+                  <Label layoutX="103.0" layoutY="151.0" text="Welcome to" textFill="WHITE">
+                     <font>
+                        <Font name="Corbel" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="42.0" layoutY="197.0" text="Work Management System" textFill="WHITE">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="97.0" layoutY="378.0" text="NoCoppyRight@TM_Ver1.2.0.1" textFill="WHITE" />
+                  <FontAwesomeIcon glyphName="BOOK" layoutX="133.0" layoutY="325.0" size="8em">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="0.8296529953412076" startY="0.37223977170156003">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.719298243522644" green="0.42403075098991394" blue="0.4880053699016571" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIcon>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="admin_form" layoutX="346.0" layoutY="5.0" prefHeight="417.0" prefWidth="337.0">
+               <children>
+                  <FontAwesomeIcon glyphName="USER" layoutX="136.0" layoutY="131.0" size="7em">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="0.8296529953412076" startY="0.6687697281220734">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9298245906829834" green="0.22958631813526154" blue="0.2412569522857666" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIcon>
+                  <Label contentDisplay="CENTER" layoutX="93.0" layoutY="151.0" text="Admin Sigh In">
+                     <font>
+                        <Font name="Corbel Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="admin_username" layoutX="55.0" layoutY="209.0" onAction="#adminLogin" prefHeight="36.0" prefWidth="237.0" promptText="Admin ID" styleClass="textfield" stylesheets="@fxml.css" />
+                  <PasswordField fx:id="admin_password" layoutX="55.0" layoutY="255.0" onAction="#adminLogin" prefHeight="36.0" prefWidth="237.0" promptText="Password" styleClass="textfield" stylesheets="@fxml.css" />
+                  <Button fx:id="admin_loginBtn" layoutX="98.0" layoutY="304.0" mnemonicParsing="false" onAction="#adminLogin" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: #263F73;" styleClass="login-btn" stylesheets="@fxml.css" text="LOGIN" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana" size="15.0" />
+                     </font>
+                  </Button>
+                  <Hyperlink fx:id="admin_hyperLink" alignment="CENTER" contentDisplay="CENTER" layoutX="87.0" layoutY="355.0" onAction="#switchForm" stylesheets="@fxml.css" text="Login Employee Account ?" />
+                  <Button layoutX="286.0" layoutY="-6.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: red;" styleClass="close" stylesheets="@fxml.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0" />
+                  <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" layoutX="316.0" layoutY="12.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="employee_form" layoutX="355.0" layoutY="5.0" prefHeight="417.0" prefWidth="337.0" visible="false">
+               <children>
+                  <FontAwesomeIcon glyphName="USERS" layoutX="124.0" layoutY="124.0" size="7em">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0" startX="0.8296529953412076" startY="0.6687697281220734">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9298245906829834" green="0.22958631813526154" blue="0.2412569522857666" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIcon>
+                  <Label contentDisplay="CENTER" layoutX="87.0" layoutY="152.0" text="Employee Sign In">
+                     <font>
+                        <Font name="Corbel Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="employee_id" layoutX="50.0" layoutY="207.0" onAction="#employeeLogin" prefHeight="36.0" prefWidth="237.0" promptText="Employee ID" styleClass="textfield" stylesheets="@fxml.css" />
+                  <PasswordField fx:id="employee_password" layoutX="50.0" layoutY="250.0" onAction="#employeeLogin" prefHeight="36.0" prefWidth="237.0" promptText="Password" styleClass="textfield" stylesheets="@fxml.css" />
+                  <Button fx:id="employee_loginBtn" layoutX="93.0" layoutY="310.0" mnemonicParsing="false" onAction="#employeeLogin" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: #263F73;" styleClass="login-btn" stylesheets="@fxml.css" text="LOGIN" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana" size="15.0" />
+                     </font>
+                  </Button>
+                  <Hyperlink fx:id="employee_hyperLink" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="357.0" onAction="#switchForm" stylesheets="@fxml.css" text="Login Admin Account ?" />
+                  <Button layoutX="295.0" layoutY="-4.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: red;" styleClass="close" stylesheets="@fxml.css" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="-4.0" />
+                  <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" layoutX="309.0" layoutY="13.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

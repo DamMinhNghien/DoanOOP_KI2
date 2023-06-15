@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane layoutX="295.0" layoutY="186.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="45.0" prefWidth="200.0" styleClass="semi-top-form" stylesheets="@dashboardDesign.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="350.0" layoutY="-77.0" prefHeight="35.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button layoutX="1055.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="39.0" styleClass="close" stylesheets="@dashboardDesign.css">
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="CLOSE" size="1.3em" />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="1014.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" styleClass="minimize" stylesheets="@dashboardDesign.css">
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="MINUS" size="1.3em" />
+                                 </graphic>
+                              </Button>
+                              <Label layoutX="26.0" layoutY="9.0" prefHeight="17.0" prefWidth="254.0" styleClass="labell-inpage" stylesheets="@dashboardDesign.css" text="Work Management System | Employee Portal" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="555.0" prefWidth="197.0" stylesheets="@dashboardDesign.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <FontAwesomeIcon fill="WHITE" glyphName="USERS" layoutX="47.0" layoutY="120.0" size="8em" />
+                        <Label layoutX="55.0" layoutY="146.0" styleClass="welcomeadmin" stylesheets="@dashboardDesign.css" text="Welcome">
+                           <font>
+                              <Font name="Verdana" size="19.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="74.0" layoutY="178.0" styleClass="welcomeadmin" text="Users">
+                           <font>
+                              <Font name="Verdana" size="17.0" />
+                           </font>
+                        </Label>
+                        <Line endX="131.99998474121094" endY="-1.52587890625E-5" layoutX="26.0" layoutY="216.0" startX="10.9993896484375" stroke="WHITE" strokeWidth="2.0" />
+                        <Button layoutY="285.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="197.0" styleClass="button-outpage" stylesheets="@dashboardDesign.css" text="Bảng" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="15.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="-1.0" layoutY="351.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="195.0" styleClass="button-outpage" stylesheets="@dashboardDesign.css" text="Lịch" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="15.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" layoutX="-1.0" layoutY="497.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="198.0" styleClass="button-outpage" stylesheets="@dashboardDesign.css" text="Sign out" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana" size="15.0" />
+                           </font>
+                        </Button>
+                        <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" layoutX="27.0" layoutY="521.0" size="2em" />
+                        <FontAwesomeIcon fill="WHITE" glyphName="CALENDAR" layoutX="38.0" layoutY="374.0" size="1.7em" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="shadown" />
+                        <String fx:value="nav-form" />
+                     </styleClass>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="127.0" layoutY="104.0" prefHeight="554.6666666666666" prefWidth="902.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="529.0" prefWidth="876.0" stylesheets="@dashboardDesign.css">
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadown" />
+                                 </styleClass>
+                                 <children>
+                                    <Label layoutX="381.0" layoutY="32.0" text="Work Space">
+                                       <font>
+                                          <Font name="Verdana" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="317.0" layoutY="14.0" prefHeight="62.0" prefWidth="60.0" text="W">
+                                       <font>
+                                          <Font name="System Bold" size="42.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
