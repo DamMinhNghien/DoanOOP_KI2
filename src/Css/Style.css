@@ -1,0 +1,99 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 2, 2023, 2:12:28 PM
+    Author     : admin
+*/
+
+.buttonz{
+    -fx-background-color:  #255873;
+        -fx-cursor: hand;
+}
+.buttonz:hover {
+    -fx-background-color: #12394e;
+}
+.buttonz:pressed{
+    -fx-background-color: #12a3ef;
+}
+.OKbutton{
+    -fx-background-color:  #ffffff;
+    -fx-border-color:  #255873;
+    -fx-border-radius: 20;
+        -fx-cursor: hand;
+}
+.OKbutton:hover {
+    -fx-background-color: #bbbbbb;
+   
+}
+.OKbutton:pressed{
+    -fx-background-color: #8f8f8f;
+  
+}
+
+.root1{
+    -fx-background-image: url('../image/abstract-22108_960_720.jpg');
+    -fx-background-size:cover;
+}
+.listview {
+    -fx-background-radius: 20;
+}
+.avatar{
+     -fx-background-image: url('../image/R.jpg');
+    -fx-border-radius: 50%;
+}
+.card{
+        -fx-background-color: #ffffff;
+        -fx-border-color: #255873;
+        -fx-background-radius: 30;
+        -fx-cursor: hand;
+   
+}
+
+.card:pressed{
+    -fx-opacity: 1.1;
+}
+.list-cell1 {
+        -fx-background-radius: 20;
+         -fx-background-color: #ffffff;
+
+}
+.List{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20;
+}
+
+.list-cell1:selected:focused, .list-cell:selected {
+    -fx-background-color: white;
+}
+.list-cell1{
+    background-color: gray;
+}
+.ListView{
+    -fx-background-radius: 20;
+}
+.AnchorPane:pressed{
+    -fx-background-color: #ffffff;
+}
+.AnchorPane{
+    -fx-background-color: #ffffff;
+}
+.DesPane{
+    -fx-background-color: #8f8f8f;
+}
+.SceneDes{
+    -fx-border-color: #255873;
+}
+.combo-box .list-cell:hover {
+    -fx-background-color: lightgray;
+}
+.combo-box .list-cell:selected {
+    -fx-background-color: lightblue;
+}
+.bold-text {
+    -fx-font-weight: bold;
+}
+.normal-text{
+     -fx-font-weight: normal;
+}

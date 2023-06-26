@@ -1,0 +1,14 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 6, 2023, 5:39:04 PM
+    Author     : admin
+*/
+
+* {
+    -fx-font-family: "tên font";
+    -fx-font-size: 14px; 
+        -fx-font-weight: normal;
+}
