@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -35,9 +36,25 @@ public class FXMLDocumentController implements Initializable {
 
     private Connection conn = null;
     private PreparedStatement pat = null;
+    @FXML
+    private Button minimize;
 
     @FXML
+    private Button close_Btn;
+
+    @FXML
+    private AnchorPane container;
+    @FXML
     private Button Return;
+
+    public void close(ActionEvent event) {
+        System.exit(0);
+    }
+
+    public void minimize() {
+        Stage stage = (Stage) container.getScene().getWindow();
+        stage.setIconified(true);
+    }
 
     @FXML
     void Return(MouseEvent event) throws IOException {
