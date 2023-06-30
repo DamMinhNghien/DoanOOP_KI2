@@ -11,7 +11,7 @@
    <children>
     
                                                                              
-                        <AnchorPane id="AnchorPane" fx:id="CardPane3" prefHeight="514.0" prefWidth="626.0">
+                        <AnchorPane id="AnchorPane" fx:id="CardPane3" prefHeight="514.0" prefWidth="626.0" style="-fx-border-color: #752131; -fx-border-color: #8825a1; -fx-border-width: 5;">
                <children>
                   <FontAwesomeIcon glyphName="STAR" layoutX="14.0" layoutY="64.0" size="30" />
                   <Label layoutX="445.0" layoutY="86.0" text="Đã gợi ý" />

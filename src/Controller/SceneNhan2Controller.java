@@ -32,18 +32,18 @@ public class SceneNhan2Controller implements Initializable {
 
     @FXML
     private Button TaoNhanMoi;
-    private int p1 = 1;
-    private int p2 = 1;
-    private int p3 = 1;
-    private int p4 = 1;
-    private int p5 = 1;
-    private int p6 = 1;
-    private int p7 = 1;
-    private int p8 = 1;
-    private int p9 = 1;
-    private int p10 = 1;
-    private int p11 = 1;
-    private int p12 = 1;
+    private int p1 = 2;
+    private int p2 = 2;
+    private int p3 = 2;
+    private int p4 = 2;
+    private int p5 = 2;
+    private int p6 = 2;
+    private int p7 = 2;
+    private int p8 = 2;
+    private int p9 = 2;
+    private int p10 = 2;
+    private int p11 = 2;
+    private int p12 = 2;
 
     @FXML
     private Pane PickColor1;
@@ -77,7 +77,8 @@ public class SceneNhan2Controller implements Initializable {
 
     @FXML
     private Pane PickColor8;
-
+    private CardController cardController;
+    private NewSceneController newSceneController;
     @FXML
     private Pane PickColor9;
     private SceneNhanController sceneNhanController;
@@ -95,13 +96,170 @@ public class SceneNhan2Controller implements Initializable {
         if (card.getLabels().getIDDem() == 1) {
             System.out.println("1");
         }
-
     }
 
-    public void idd(String id) {
+    public void idd(String id, int x) throws SQLException {
         idd = id.substring(id.lastIndexOf("button") + "button".length());
-        card.getLabels().setIDDem(Integer.parseInt(idd));
-        System.out.println(card.getLabels().getIDDem());
+
+        for (int i = 1; i < x; i++) {
+            if (Integer.parseInt(idd) == i) {
+                card.getLabels().setIDDem(Integer.parseInt(idd));
+                card.getLabel(card.getLabels().getIDDem());
+                System.out.println(card.getLabels().getColor());
+                if (card.getLabels().getColor().equals("blue")) {
+                    PickColor1.setStyle("-fx-background-color: blue;-fx-border-width: 4px;; -fx-border-color: black;");
+                    p1 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:blue;");
+                }
+                if (card.getLabels().getColor().equals("red")) {
+                    PickColor2.setStyle("-fx-background-color: red;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p2 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:red;");
+                }
+                if (card.getLabels().getColor().equals("purple")) {
+                    PickColor3.setStyle("-fx-background-color: purple;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p3 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:purple;");
+
+                }
+                if (card.getLabels().getColor().equals("yellow")) {
+                    PickColor4.setStyle("-fx-background-color: yellow;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p4 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:yellow;");
+
+                }
+                if (card.getLabels().getColor().equals("brown")) {
+                    PickColor5.setStyle("-fx-background-color: brown;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p5 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:brown;");
+
+                }
+
+                if (card.getLabels().getColor().equals("hotpink")) {
+                    PickColor6.setStyle("-fx-background-color: hotpink;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p6 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:hotpink;");
+
+                }
+                if (card.getLabels().getColor().equals("coral")) {
+                    PickColor7.setStyle("-fx-background-color: coral;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p7 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:coral;");
+
+                }
+                if (card.getLabels().getColor().equals("greenyellow")) {
+                    PickColor8.setStyle("-fx-background-color: greenyellow;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p8 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:greenyellow;");
+
+                }
+                if (card.getLabels().getColor().equals("grey")) {
+                    PickColor9.setStyle("-fx-background-color: grey;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p9 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:grey;");
+
+                }
+                if (card.getLabels().getColor().equals("lightseagreen")) {
+                    PickColor10.setStyle("-fx-background-color: lightseagreen;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p10 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:lightseagreen;");
+
+                }
+                if (card.getLabels().getColor().equals("peachpuff")) {
+                    PickColor11.setStyle("-fx-background-color: peachpuff;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p11 = 1;
+
+                    ReviewNhan.setStyle("-fx-background-color:peachpuff;");
+
+                }
+                if (card.getLabels().getColor().equals("white")) {
+                    PickColor12.setStyle("-fx-background-color: brown;-fx-border-width: 4px;; -fx-border-color: black;");
+
+                    p12 = 1;
+                    ReviewNhan.setStyle("-fx-background-color:white;");
+
+                }
+            } else {
+                card.getLabels().setIDDem(i);
+                card.getLabel(i);
+                if (card.getLabels().getColor().equals("blue")) {
+                    PickColor1.setStyle("-fx-background-color: blue; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p1 = 3;
+                }
+                if (card.getLabels().getColor().equals("red")) {
+                    PickColor2.setStyle("-fx-background-color: red; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p2 = 3;
+                }
+                if (card.getLabels().getColor().equals("purple")) {
+                    PickColor3.setStyle("-fx-background-color: purple; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p3 = 3;
+                }
+                if (card.getLabels().getColor().equals("yellow")) {
+                    PickColor4.setStyle("-fx-background-color: yellow; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p4 = 3;
+                }
+                if (card.getLabels().getColor().equals("brown")) {
+                    PickColor5.setStyle("-fx-background-color: brown; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p5 = 3;
+                }
+                if (card.getLabels().getColor().equals("hotpink")) {
+                    PickColor6.setStyle("-fx-background-color: hotpink; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p6 = 3;
+                }
+                if (card.getLabels().getColor().equals("coral")) {
+                    PickColor7.setStyle("-fx-background-color: coral; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p7 = 3;
+                }
+                if (card.getLabels().getColor().equals("greenyellow")) {
+                    PickColor8.setStyle("-fx-background-color: greenyellow; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p8 = 3;
+                }
+                if (card.getLabels().getColor().equals("grey")) {
+                    PickColor9.setStyle("-fx-background-color: grey; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p9 = 3;
+                }
+                if (card.getLabels().getColor().equals("lightseagreen")) {
+                    PickColor10.setStyle("-fx-background-color: lightseagreen; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p10 = 3;
+                }
+                if (card.getLabels().getColor().equals("peachpuff")) {
+                    PickColor11.setStyle("-fx-background-color: peachpuff; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p11 = 3;
+                }
+                if (card.getLabels().getColor().equals("white")) {
+                    PickColor12.setStyle("-fx-background-color: white; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
+                    p12 = 3;
+                }
+            }
+        }
+    }
+
+    public void setCardController(CardController cardController) {
+        this.cardController = cardController;
+    }
+
+    public void setNewSceneController(NewSceneController newSceneController) {
+        this.newSceneController = newSceneController;
     }
 
     public void setSceneNhanController(SceneNhanController sceneNhanController) {
@@ -118,214 +276,14 @@ public class SceneNhan2Controller implements Initializable {
         stage.setScene(scene);
         SceneNhanController sceneNhanController = loader.getController();
         sceneNhanController.setCard(card);
+        sceneNhanController.setNewSceneController(newSceneController);
+        sceneNhanController.setCardController(cardController);
         sceneNhanController.reLabel();
         stage.show();
     }
 
-    public void PickColor(String color) {
-        if (color.equals("blue")) {
-            PickColor1.setStyle("-fx-background-color: blue;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 1;
-            p2 = 2;
-            p3 = 2;
-            p4 = 2;
-            p5 = 2;
-            p6 = 2;
-            p7 = 2;
-            p8 = 2;
-            p9 = 2;
-            p10 = 2;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:blue;");
-        }
-        if (color.equals("red")) {
-            PickColor2.setStyle("-fx-background-color: red;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 1;
-            p3 = 2;
-            p4 = 2;
-            p5 = 2;
-            p6 = 2;
-            p7 = 2;
-            p8 = 2;
-            p9 = 2;
-            p10 = 2;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:red;");
-        }
-        if (color.equals("purple")) {
-            PickColor3.setStyle("-fx-background-color: purple;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 1;
-            p4 = 2;
-            p5 = 2;
-            p6 = 2;
-            p7 = 2;
-            p8 = 2;
-            p9 = 2;
-            p10 = 2;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:purple;");
+    public void NhanDaTao() {
 
-        }
-        if (color.equals("yellow")) {
-            PickColor4.setStyle("-fx-background-color: yellow;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 2;
-            p4 = 1;
-            p5 = 2;
-            p6 = 2;
-            p7 = 2;
-            p8 = 2;
-            p9 = 2;
-            p10 = 2;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:yellow;");
-
-        }
-        if (color.equals("brown")) {
-            PickColor5.setStyle("-fx-background-color: brown;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 2;
-            p4 = 2;
-            p5 = 1;
-            p6 = 2;
-            p7 = 2;
-            p8 = 2;
-            p9 = 2;
-            p10 = 2;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:brown;");
-
-        }
-
-        if (color.equals("hotpink")) {
-            PickColor5.setStyle("-fx-background-color: hotpink;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 2;
-            p4 = 2;
-            p5 = 2;
-            p6 = 1;
-            p7 = 2;
-            p8 = 2;
-            p9 = 2;
-            p10 = 2;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:hotpink;");
-
-        }
-        if (color.equals("coral")) {
-            PickColor5.setStyle("-fx-background-color: coral;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 2;
-            p4 = 2;
-            p5 = 2;
-            p6 = 2;
-            p7 = 1;
-            p8 = 2;
-            p9 = 2;
-            p10 = 2;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:coral;");
-
-        }
-        if (color.equals("greenyellow")) {
-            PickColor5.setStyle("-fx-background-color: greenyellow;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 2;
-            p4 = 2;
-            p5 = 2;
-            p6 = 2;
-            p7 = 2;
-            p8 = 1;
-            p9 = 2;
-            p10 = 2;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:greenyellow;");
-
-        }
-        if (color.equals("grey")) {
-            PickColor5.setStyle("-fx-background-color: grey;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 2;
-            p4 = 2;
-            p5 = 2;
-            p6 = 2;
-            p7 = 2;
-            p8 = 2;
-            p9 = 1;
-            p10 = 2;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:grey;");
-
-        }
-        if (color.equals("lightseagreen")) {
-            PickColor5.setStyle("-fx-background-color: lightseagreen;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 2;
-            p4 = 2;
-            p5 = 2;
-            p6 = 2;
-            p7 = 2;
-            p8 = 2;
-            p9 = 2;
-            p10 = 1;
-            p11 = 2;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:lightseagreen;");
-
-        }
-        if (color.equals("peachpuff")) {
-            PickColor5.setStyle("-fx-background-color: peachpuff;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 2;
-            p4 = 2;
-            p5 = 2;
-            p6 = 2;
-            p7 = 2;
-            p8 = 2;
-            p9 = 2;
-            p10 = 2;
-            p11 = 1;
-            p12 = 2;
-            ReviewNhan.setStyle("-fx-background-color:peachpuff;");
-
-        }
-        if (color.equals("white")) {
-            PickColor5.setStyle("-fx-background-color: brown;-fx-border-width: 4px;; -fx-border-color: black;");
-            p1 = 2;
-            p2 = 2;
-            p3 = 2;
-            p4 = 2;
-            p5 = 2;
-            p6 = 2;
-            p7 = 2;
-            p8 = 2;
-            p9 = 2;
-            p10 = 2;
-            p11 = 2;
-            p12 = 1;
-            ReviewNhan.setStyle("-fx-background-color:white;");
-
-        }
     }
 
     @Override
@@ -352,28 +310,50 @@ public class SceneNhan2Controller implements Initializable {
                 ReviewNhan.setStyle("-fx-background-color:blue;");
                 PickColor1.setStyle("-fx-background-color: blue;-fx-border-width: 4px;; -fx-border-color: black;");
                 p1 = 1;
-                p2 = 2;
-                p3 = 2;
-                p4 = 2;
-                p5 = 2;
-                p6 = 2;
-                p7 = 2;
-                p8 = 2;
-                p9 = 2;
-                p10 = 2;
-                p11 = 2;
-                p12 = 2;
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor2.setOnMouseClicked(event -> {
@@ -385,29 +365,51 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p2 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:red;");
                 PickColor2.setStyle("-fx-background-color: red;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
                 p2 = 1;
-                p3 = 2;
-                p4 = 2;
-                p5 = 2;
-                p6 = 2;
-                p7 = 2;
-                p8 = 2;
-                p9 = 2;
-                p10 = 2;
-                p11 = 2;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor3.setOnMouseClicked(event -> {
@@ -419,29 +421,51 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p3 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:purple;");
                 PickColor3.setStyle("-fx-background-color: purple;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
                 p3 = 1;
-                p4 = 2;
-                p5 = 2;
-                p6 = 2;
-                p7 = 2;
-                p8 = 2;
-                p9 = 2;
-                p10 = 2;
-                p11 = 2;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor4.setOnMouseClicked(event -> {
@@ -453,29 +477,52 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p4 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:yellow;");
                 PickColor4.setStyle("-fx-background-color: yellow;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
-                p3 = 2;
+
                 p4 = 1;
-                p5 = 2;
-                p6 = 2;
-                p7 = 2;
-                p8 = 2;
-                p9 = 2;
-                p10 = 2;
-                p11 = 2;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor5.setOnMouseClicked(event -> {
@@ -487,29 +534,52 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p5 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:brown;");
                 PickColor5.setStyle("-fx-background-color: brown;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
-                p3 = 2;
-                p4 = 2;
+
                 p5 = 1;
-                p6 = 2;
-                p7 = 2;
-                p8 = 2;
-                p9 = 2;
-                p10 = 2;
-                p11 = 2;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor6.setOnMouseClicked(event -> {
@@ -521,29 +591,52 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p6 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:hotpink;");
                 PickColor6.setStyle("-fx-background-color: hotpink;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
-                p3 = 2;
-                p4 = 2;
-                p5 = 2;
+
                 p6 = 1;
-                p7 = 2;
-                p8 = 2;
-                p9 = 2;
-                p10 = 2;
-                p11 = 2;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor7.setOnMouseClicked(event -> {
@@ -555,29 +648,52 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p7 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:coral;");
                 PickColor7.setStyle("-fx-background-color: coral;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
-                p3 = 2;
-                p4 = 2;
-                p5 = 2;
-                p6 = 2;
+
                 p7 = 1;
-                p8 = 2;
-                p9 = 2;
-                p10 = 2;
-                p11 = 2;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor8.setOnMouseClicked(event -> {
@@ -589,29 +705,52 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p8 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:greenyellow;");
                 PickColor8.setStyle("-fx-background-color: greenyellow;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
-                p3 = 2;
-                p4 = 2;
-                p5 = 2;
-                p6 = 2;
-                p7 = 2;
+
                 p8 = 1;
-                p9 = 2;
-                p10 = 2;
-                p11 = 2;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor9.setOnMouseClicked(event -> {
@@ -623,29 +762,52 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p9 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:grey;");
                 PickColor9.setStyle("-fx-background-color: grey;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
-                p3 = 2;
-                p4 = 2;
-                p5 = 2;
-                p6 = 2;
-                p7 = 2;
-                p8 = 2;
+
                 p9 = 1;
-                p10 = 2;
-                p11 = 2;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor10.setOnMouseClicked(event -> {
@@ -657,63 +819,109 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p10 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:lightseagreen;");
                 PickColor10.setStyle("-fx-background-color: lightseagreen;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
-                p3 = 2;
-                p4 = 2;
-                p5 = 2;
-                p6 = 2;
-                p7 = 2;
-                p8 = 2;
-                p9 = 2;
+
                 p10 = 1;
-                p11 = 2;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor11.setOnMouseClicked(event -> {
 
             if (p11 == 1) {
                 PickColor11.setStyle("-fx-background-color: peachpuff;");
-                p10 = 2;
+                p11 = 2;
                 ReviewNhan.setStyle("-fx-background-color: transparent;");
             } else if (p11 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:peachpuff;");
                 PickColor11.setStyle("-fx-background-color: peachpuff;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
-                p3 = 2;
-                p4 = 2;
-                p5 = 2;
-                p6 = 2;
-                p7 = 2;
-                p8 = 2;
-                p9 = 2;
-                p10 = 2;
+
                 p11 = 1;
-                p12 = 2;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor12.setStyle("-fx-background-color:white;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
+                if (p12 != 3) {
+                    PickColor12.setStyle("-fx-background-color:white;");
+                    p12 = 2;
+                }
             }
         });
         PickColor12.setOnMouseClicked(event -> {
@@ -725,29 +933,52 @@ public class SceneNhan2Controller implements Initializable {
             } else if (p12 == 2) {
                 ReviewNhan.setStyle("-fx-background-color:white;");
                 PickColor12.setStyle("-fx-background-color: white;-fx-border-width: 4px;; -fx-border-color: black;");
-                p1 = 2;
-                p2 = 2;
-                p3 = 2;
-                p4 = 2;
-                p5 = 2;
-                p6 = 2;
-                p7 = 2;
-                p8 = 2;
-                p9 = 2;
-                p10 = 2;
-                p11 = 2;
+
                 p12 = 1;
-                PickColor1.setStyle("-fx-background-color:blue;");
-                PickColor2.setStyle("-fx-background-color:red;");
-                PickColor3.setStyle("-fx-background-color:purple;");
-                PickColor4.setStyle("-fx-background-color:yellow;");
-                PickColor5.setStyle("-fx-background-color:brown;");
-                PickColor6.setStyle("-fx-background-color:hotpink;");
-                PickColor7.setStyle("-fx-background-color:coral;");
-                PickColor8.setStyle("-fx-background-color:greenyellow;");
-                PickColor9.setStyle("-fx-background-color:grey;");
-                PickColor10.setStyle("-fx-background-color:lightseagreen;");
-                PickColor11.setStyle("-fx-background-color:peachpuff;");
+                if (p2 != 3) {
+                    PickColor2.setStyle("-fx-background-color:red;");
+                    p2 = 2;
+                }
+                if (p3 != 3) {
+                    PickColor3.setStyle("-fx-background-color:purple;");
+                    p3 = 2;
+                }
+                if (p4 != 3) {
+                    PickColor4.setStyle("-fx-background-color:yellow;");
+                    p4 = 2;
+                }
+                if (p5 != 3) {
+                    PickColor5.setStyle("-fx-background-color:brown;");
+                    p5 = 2;
+                }
+                if (p6 != 3) {
+                    PickColor6.setStyle("-fx-background-color:hotpink;");
+                    p6 = 2;
+                }
+                if (p7 != 3) {
+                    PickColor7.setStyle("-fx-background-color:coral;");
+                    p7 = 2;
+                }
+                if (p8 != 3) {
+                    PickColor8.setStyle("-fx-background-color:greenyellow;");
+                    p8 = 2;
+                }
+                if (p9 != 3) {
+                    PickColor9.setStyle("-fx-background-color:grey;");
+                    p9 = 2;
+                }
+                if (p10 != 3) {
+                    PickColor10.setStyle("-fx-background-color:lightseagreen;");
+                    p10 = 2;
+                }
+                if (p11 != 3) {
+                    PickColor11.setStyle("-fx-background-color:peachpuff;");
+                    p11 = 2;
+                }
+                if (p1 != 3) {
+                    PickColor1.setStyle("-fx-background-color:blue;");
+                    p1 = 2;
+                }
             }
         });
     }

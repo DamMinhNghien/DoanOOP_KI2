@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -56,7 +58,7 @@ public class SceneNhanController implements Initializable {
     private AnchorPane PaneNhan;
 
     @FXML
-    void NewNhan(MouseEvent event) throws IOException {
+    void NewNhan(MouseEvent event) throws IOException, SQLException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneNhan2.fxml"));
 
@@ -67,6 +69,10 @@ public class SceneNhanController implements Initializable {
         SceneNhan2Controller sceneNhan2Controller = loader.getController();
         sceneNhan2Controller.setSceneNhanController(this);
         sceneNhan2Controller.setCard(card);
+        sceneNhan2Controller.setCardController(cardController);
+        sceneNhan2Controller.setNewSceneController(newSceneController);
+        int x = card.getNewDem();
+        sceneNhan2Controller.idd("button" + 0, x);
         stage.show();
     }
 
@@ -123,6 +129,8 @@ public class SceneNhanController implements Initializable {
                 SceneNhan2Controller sceneNhan2Controller = loader.getController();
                 sceneNhan2Controller.setSceneNhanController(this);
                 sceneNhan2Controller.setCard(card);
+                sceneNhan2Controller.setNewSceneController(newSceneController);
+                sceneNhan2Controller.setCardController(cardController);
                 stage.show();
             } catch (IOException e) {
                 // Xử lý ngoại lệ IOException ở đây
@@ -191,7 +199,8 @@ public class SceneNhanController implements Initializable {
                 card.setLabels(label1);
                 card.getLabel(i);
                 label1.setIDDem(i);
-                TaoNhan2(label1.getColor(), label1.getName(), i);
+                TaoNhan2(label1.getColor(), label1.getName(), i, x
+                );
             }
         }
 
@@ -204,11 +213,11 @@ public class SceneNhanController implements Initializable {
             card.setLabels(label1);
             card.getLabel(i);
             label1.setIDDem(i);
-            TaoNhan2(label1.getColor(), label1.getName(), i);
+            TaoNhan2(label1.getColor(), label1.getName(), i, x);
         }
     }
 
-    public void TaoNhan2(String color, String name, int i) throws SQLException {
+    public void TaoNhan2(String color, String name, int i, int x) throws SQLException {
         // Tạo HBox mới
 
         HBox hbox = new HBox();
@@ -244,8 +253,14 @@ public class SceneNhanController implements Initializable {
                 SceneNhan2Controller sceneNhan2Controller = loader.getController();
                 sceneNhan2Controller.setSceneNhanController(this);
                 sceneNhan2Controller.setCard(card);
-                sceneNhan2Controller.idd(button.getId());
-                sceneNhan2Controller.PickColor(color);
+                sceneNhan2Controller.setNewSceneController(newSceneController);
+                sceneNhan2Controller.setCardController(cardController);
+                try {
+                    sceneNhan2Controller.idd(button.getId(), x);
+                } catch (SQLException ex) {
+                    Logger.getLogger(SceneNhanController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+//                sceneNhan2Controller.PickColor(color);
                 stage.show();
             } catch (IOException e) {
                 // Xử lý ngoại lệ IOException ở đây

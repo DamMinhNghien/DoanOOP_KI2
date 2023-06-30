@@ -447,6 +447,7 @@ public class MainCard {
                 labels.setColor(rs.getString("color"));
                 labels.setName(rs.getString("LabelName"));
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;

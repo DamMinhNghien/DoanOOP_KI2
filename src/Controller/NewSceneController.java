@@ -405,6 +405,7 @@ public class NewSceneController implements Initializable {
         sceneNhanController.setCard(card);
         sceneNhanController.Tao5Nhan();
         sceneNhanController.setCardController(cardController);
+
         newStage.showAndWait();
         //378 166
     }
