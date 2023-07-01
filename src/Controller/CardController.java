@@ -37,6 +37,8 @@ import javafx.stage.StageStyle;
  */
 public class CardController implements Initializable {
 
+    Pane paneLabel = new Pane();
+
     private Label labeldes1 = new Label();
     private MainCard card;
     private Connection conn = null;
@@ -55,14 +57,27 @@ public class CardController implements Initializable {
     }
 
     public void setLabelCard(String myColor) {
-        Pane paneLabel = new Pane();
 
         paneLabel.setPrefSize(35, 10);
         paneLabel.setLayoutX(6);
         paneLabel.setLayoutY(26);
         paneLabel.setStyle(" -fx-background-color: " + myColor + "; -fx-background-radius: 5px;");
-
         CardPane.getChildren().add(paneLabel);
+
+    }
+
+    public void setLabelCard2() {
+        CardPane.getChildren().remove(paneLabel);
+    }
+
+    public void reSetLabelCard() {
+        if (!card.getLabelColor().equals("khong")) {
+            paneLabel.setPrefSize(35, 10);
+            paneLabel.setLayoutX(6);
+            paneLabel.setLayoutY(26);
+            paneLabel.setStyle(" -fx-background-color: " + card.getLabelColor() + "; -fx-background-radius: 5px;");
+            CardPane.getChildren().add(paneLabel);
+        }
     }
 
     @FXML
@@ -122,6 +137,7 @@ public class CardController implements Initializable {
             NewSceneController newSceneController = loader.getController();
             newSceneController.setCard(card);
             newSceneController.ReDes(card);
+            newSceneController.rePaneLabel();
             String labelText = label.getText();
             newSceneController.setLabelText(labelText);
             newSceneController.setCardController(this);

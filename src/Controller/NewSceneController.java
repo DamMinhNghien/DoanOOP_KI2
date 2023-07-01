@@ -43,6 +43,7 @@ import javafx.stage.StageStyle;
  */
 public class NewSceneController implements Initializable {
 
+    Pane paneLabel = new Pane();
     @FXML
     private Button DanNhan;
 
@@ -78,13 +79,28 @@ public class NewSceneController implements Initializable {
     private AnchorPane CardPane3;
 
     public void PaneLabel(String myColor) {
-        Pane paneLabel = new Pane();
 
         paneLabel.setPrefSize(40, 25);
         paneLabel.setLayoutX(52);
         paneLabel.setLayoutY(90);
         paneLabel.setStyle(" -fx-background-color: " + myColor + ";");
         CardPane3.getChildren().add(paneLabel);
+    }
+
+    public void PaneLabel2() {
+
+        CardPane3.getChildren().remove(paneLabel);
+
+    }
+
+    public void rePaneLabel() {
+        if (!card.getLabelColor().equals("khong")) {
+            paneLabel.setPrefSize(40, 25);
+            paneLabel.setLayoutX(52);
+            paneLabel.setLayoutY(90);
+            paneLabel.setStyle(" -fx-background-color: " + card.getLabelColor() + ";");
+            CardPane3.getChildren().add(paneLabel);
+        }
     }
 
     @FXML
@@ -403,7 +419,7 @@ public class NewSceneController implements Initializable {
         SceneNhanController sceneNhanController = loader.getController();
         sceneNhanController.setNewSceneController(this);
         sceneNhanController.setCard(card);
-        sceneNhanController.Tao5Nhan();
+        sceneNhanController.Tao5Nhan(card.CheckLabelDem(), card.getNewDem(), card.getLabelColor());
         sceneNhanController.setCardController(cardController);
 
         newStage.showAndWait();

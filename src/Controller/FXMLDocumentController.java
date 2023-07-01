@@ -126,6 +126,7 @@ public class FXMLDocumentController implements Initializable {
             CardController cardController = loader.getController();
             cardController.setCard(NewCard);
             cardController.UpTitleDB();
+            cardController.reSetLabelCard();
             ObservableList<AnchorPane> items = container1.getItems();
             items.add(cardPane);
         } catch (IOException e) {

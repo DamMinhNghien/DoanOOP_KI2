@@ -50,6 +50,9 @@ public class SceneDesController implements Initializable {
     @FXML
     private Button CloseButton;
     @FXML
+    private ComboBox BoxChoice2 = new ComboBox();
+    private String[] size2 = {"italic", "Calibri", "Courier New", "Georgia", "Times New Roman", "Verdana"};
+    @FXML
     private ComboBox BoxChoice1 = new ComboBox();
     private int toggleCount = 0;
     private String[] size = {"Văn bản bình thường", "Heading 1", "Heading 2", "Heading 3", "Heading 4", "Heading 5", "Heading 6"};
@@ -154,7 +157,42 @@ public class SceneDesController implements Initializable {
 
         BoxChoice1.getItems().addAll(size);
         textArea.setWrapText(true);
-
+        BoxChoice2.getItems().addAll(size2);
+        BoxChoice2.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(item);
+                            if (item.equals("italic")) {
+                                setStyle("-fx-font-style: italic;");
+                                textArea.setStyle("-fx-font-style: italic;");
+                            } else if (item.startsWith("Calibri")) {
+                                setStyle("-fx-font-family: Calibri;");
+                                textArea.setStyle("-fx-font-family: Calibri;");
+                            } else if (item.startsWith("Courier New")) {
+                                setStyle("-fx-font-family: Courier New;");
+                                textArea.setStyle("-fx-font-family: Courier New;");
+                            } else if (item.startsWith("Georgia")) {
+                                setStyle("-fx-font-family: Georgia;");
+                                textArea.setStyle("-fx-font-family: Georgia;");
+                            } else if (item.startsWith("Times New Roman")) {
+                                setStyle("-fx-font-family: Times New Roman;");
+                                textArea.setStyle("-fx-font-family: Times New Roman;");
+                            } else if (item.startsWith("Verdana")) {
+                                setStyle("-fx-font-family: Verdana;");
+                                textArea.setStyle("-fx-font-family: Verdana;");
+                            }
+                        }
+                    }
+                };
+            }
+        });
         BoxChoice1.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> param) {

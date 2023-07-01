@@ -15,9 +15,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -29,6 +32,8 @@ public class SceneNhan2Controller implements Initializable {
 
     @FXML
     private Pane ReviewNhan;
+    @FXML
+    private TextField LabelTieuDe;
 
     @FXML
     private Button TaoNhanMoi;
@@ -75,6 +80,15 @@ public class SceneNhan2Controller implements Initializable {
     @FXML
     private Pane PickColor7;
 
+    public void setX(int x) {
+        this.x = x;
+    }
+    private int x;
+
+    public void setK(int k) {
+        this.k = k;
+    }
+    private int k;
     @FXML
     private Pane PickColor8;
     private CardController cardController;
@@ -92,20 +106,135 @@ public class SceneNhan2Controller implements Initializable {
     }
 
     @FXML
-    public void TaoNhanMoi(MouseEvent event) {
-        if (card.getLabels().getIDDem() == 1) {
-            System.out.println("1");
+    public void setTextField(String text) {
+        LabelTieuDe.setText(text);
+    }
+
+    @FXML
+    public void TaoNhanMoi(MouseEvent event) throws IOException, SQLException {
+        if (p1 != 1 && p2 != 1 && p3 != 1 && p4 != 1 && p5 != 1 && p6 != 1 && p7 != 1 && p8 != 1 && p9 != 1 && p10 != 1 && p11 != 1 && p12 != 1) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText(null);
+            alert.setContentText("Vui lòng chọn nhãn để tạo!");
+            alert.showAndWait();
+        } else {
+            String style = ReviewNhan.getStyle();
+            Color backgroundColor = Color.valueOf(style.replaceAll("-fx-background-color:", "").replaceAll(";", ""));
+            String backgournColor2 = "";
+            if (backgroundColor.equals(Color.BLUE)) {
+                backgournColor2 = "blue";
+            }
+            if (backgroundColor.equals(Color.RED)) {
+                backgournColor2 = "red";
+            }
+            if (backgroundColor.equals(Color.PURPLE)) {
+                backgournColor2 = "purple";
+            }
+            if (backgroundColor.equals(Color.YELLOW)) {
+                backgournColor2 = "yellow";
+            }
+            if (backgroundColor.equals(Color.BROWN)) {
+                backgournColor2 = "brown";
+            }
+            if (backgroundColor.equals(Color.CORAL)) {
+                backgournColor2 = "coral";
+            }
+            if (backgroundColor.equals(Color.HOTPINK)) {
+                backgournColor2 = "hotpink";
+            }
+            if (backgroundColor.equals(Color.GREENYELLOW)) {
+                backgournColor2 = "greenyellow";
+            }
+            if (backgroundColor.equals(Color.GREY)) {
+                backgournColor2 = "grey";
+            }
+            if (backgroundColor.equals(Color.LIGHTSEAGREEN)) {
+                backgournColor2 = "lightseagreen";
+            }
+            if (backgroundColor.equals(Color.PEACHPUFF)) {
+                backgournColor2 = "peachpuff";
+            }
+            if (backgroundColor.equals(Color.WHITE)) {
+                backgournColor2 = "white";
+            }
+
+            for (int i = 1; i < x + 1; i++) {
+                card.getLabels().setIDDem(i);
+                card.getLabel(card.getLabels().getIDDem());
+                if (!backgournColor2.equals(card.getLabels().getColor()) && k == i) {
+                    card.UpdateLabel(backgournColor2, LabelTieuDe.getText(), i);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneNhan.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    SceneNhanController sceneNhanController = loader.getController();
+                    sceneNhanController.setCard(card);
+                    sceneNhanController.setNewSceneController(newSceneController);
+                    sceneNhanController.setCardController(cardController);
+                    sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
+                    stage.show();
+                }
+                if (backgournColor2.equals(card.getLabels().getColor()) && k == i) {
+                    card.UpdateLabel(backgournColor2, LabelTieuDe.getText(), i);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneNhan.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    SceneNhanController sceneNhanController = loader.getController();
+                    sceneNhanController.setCard(card);
+                    sceneNhanController.setNewSceneController(newSceneController);
+                    sceneNhanController.setCardController(cardController);
+                    sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
+                    stage.show();
+                }
+                if (backgournColor2.equals(card.getLabels().getColor())) {
+                    card.UpdateLabel(backgournColor2, LabelTieuDe.getText(), i);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneNhan.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    SceneNhanController sceneNhanController = loader.getController();
+                    sceneNhanController.setCard(card);
+                    sceneNhanController.setNewSceneController(newSceneController);
+                    sceneNhanController.setCardController(cardController);
+                    sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
+                    stage.show();
+                }
+            }
+            if (!backgournColor2.equals(card.getLabels().getColor()) && k == 0) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneNhan.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                SceneNhanController sceneNhanController = loader.getController();
+                sceneNhanController.setCard(card);
+                sceneNhanController.setNewSceneController(newSceneController);
+                sceneNhanController.setCardController(cardController);
+                sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
+                sceneNhanController.TaoNhan2(backgournColor2, LabelTieuDe.getText(), x + 1, card.getLabelColor(), x + 2);
+                sceneNhanController.insertLabel(backgournColor2, x + 1, LabelTieuDe.getText());
+                stage.show();
+
+            }
+
         }
+
     }
 
     public void idd(String id, int x) throws SQLException {
+        setX(x);
         idd = id.substring(id.lastIndexOf("button") + "button".length());
 
-        for (int i = 1; i < x; i++) {
+        for (int i = 1; i < x + 1; i++) {
             if (Integer.parseInt(idd) == i) {
                 card.getLabels().setIDDem(Integer.parseInt(idd));
+                setK(Integer.parseInt(idd));
                 card.getLabel(card.getLabels().getIDDem());
-                System.out.println(card.getLabels().getColor());
                 if (card.getLabels().getColor().equals("blue")) {
                     PickColor1.setStyle("-fx-background-color: blue;-fx-border-width: 4px;; -fx-border-color: black;");
                     p1 = 1;
@@ -278,7 +407,7 @@ public class SceneNhan2Controller implements Initializable {
         sceneNhanController.setCard(card);
         sceneNhanController.setNewSceneController(newSceneController);
         sceneNhanController.setCardController(cardController);
-        sceneNhanController.reLabel();
+        sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
         stage.show();
     }
 

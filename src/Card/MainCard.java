@@ -380,17 +380,58 @@ public class MainCard {
     }
 
     public int getNewDem() throws SQLException {
-        int NewDem = 0;
-        try (Connection conn = Conection.ConnectionDB.dbConn(); PreparedStatement stmt = conn.prepareStatement("SELECT MAX(LabelID) FROM Label")) {
-            ResultSet rs = stmt.executeQuery();
+        int count = 0;
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            String query = "SELECT COUNT(LabelID) FROM Label WHERE Label_The_ID=?";
+            pat = conn.prepareStatement(query);
+            pat.setInt(1, IDCard);
+            ResultSet rs = pat.executeQuery();
             if (rs.next()) {
-                NewDem = rs.getInt(1) + 1;
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public int getMaxDem() throws SQLException {
+        int MaxDem = 0;
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            // Chèn dữ liệu vào bảng "The"
+            String theQuery = "SELECT MAX(LabelID) FROM Label WHERE Label_The_ID=? ";
+            pat = conn.prepareStatement(theQuery);
+            pat.setInt(1, IDCard);
+            ResultSet rs = pat.executeQuery();
+            if (rs.next()) {
+                MaxDem = rs.getInt(1) + 1;
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
-        return NewDem;
+        return MaxDem;
+    }
+
+    public int getMinDem() throws SQLException {
+        int MinDem = 0;
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            // Chèn dữ liệu vào bảng "The"
+            String theQuery = "SELECT MIN(LabelID) FROM Label WHERE Label_The_ID=?";
+            pat = conn.prepareStatement(theQuery);
+            pat.setInt(1, IDCard);
+            ResultSet rs = pat.executeQuery();
+            if (rs.next()) {
+                MinDem = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return MinDem;
     }
 
     public void UpdateDem() throws SQLException {
@@ -421,12 +462,13 @@ public class MainCard {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
 
-            String sql1 = "INSERT INTO Label(labelID,Label_The_ID,color,LabelName) VALUES (?,?,?,?);";
+            String sql1 = "INSERT INTO Label(labelID,Label_The_ID,color,LabelName,CheckBox) VALUES (?,?,?,?,?);";
             pat = conn.prepareStatement(sql1);
             pat.setInt(1, labels.getIDDem());
             pat.setInt(2, IDCard);
             pat.setString(3, labels.getColor());
             pat.setString(4, labels.getName());
+            pat.setString(5, "khong");
             pat.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -451,6 +493,92 @@ public class MainCard {
         } catch (SQLException ex) {
             Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
+        }
+    }
+
+    public void InsertCheckBox(String color, int number) throws SQLException {
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            String sql1 = "UPDATE Label SET CheckBox=? WHERE LabelID=? AND Label_The_ID=? ";
+            pat = conn.prepareStatement(sql1);
+            pat.setString(1, color);
+            pat.setInt(2, number);
+            pat.setInt(3, IDCard);
+            pat.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            conn.close();
+        }
+    }
+
+    public String getLabelColor() {
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            String sql = "SELECT CheckBox FROM Label WHERE Label_The_ID=?  AND CheckBox <> ?";
+            pat = conn.prepareStatement(sql);
+            pat.setInt(1, IDCard);
+            pat.setString(2, "khong");
+            ResultSet rs = pat.executeQuery();
+            if (rs.next()) {
+                String checkbox = rs.getString("CheckBox");
+                return checkbox;
+
+            } else {
+                return "khong";
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (pat != null) {
+                    pat.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+
+    }
+
+    public void UnCheckBox(String color, int number) throws SQLException {
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            String sql1 = "UPDATE Label SET CheckBox=? WHERE LabelID=? AND Label_The_ID=?";
+            pat = conn.prepareStatement(sql1);
+            pat.setString(1, "khong");
+            pat.setInt(2, number);
+            pat.setInt(3, IDCard);
+            pat.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            conn.close();
+        }
+    }
+
+    public void UpdateLabel(String color, String name, int number) throws SQLException {
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            String sql1 = "UPDATE Label SET color=?, LabelName=? WHERE LabelID=? AND Label_The_ID=? ";
+            pat = conn.prepareStatement(sql1);
+            pat.setString(1, color);
+            pat.setString(2, name);
+            pat.setInt(3, number);
+            pat.setInt(4, IDCard);
+            pat.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            conn.close();
         }
     }
 

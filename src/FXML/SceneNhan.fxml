@@ -17,7 +17,7 @@
       </ListView>
       <Label layoutX="104.0" layoutY="5.0" prefHeight="18.0" prefWidth="37.0" text="Nhãn" />
       <Separator layoutX="23.0" layoutY="21.0" prefWidth="200.0" />
-      <TextField layoutX="12.0" layoutY="30.0" prefHeight="26.0" prefWidth="221.0" promptText="Tìm nhãn..." />
+      <TextField fx:id="TimNhan" layoutX="12.0" layoutY="30.0" prefHeight="26.0" prefWidth="221.0" promptText="Tìm nhãn..." />
       <Button fx:id="NewNhan" layoutX="12.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#NewNhan" prefHeight="18.0" prefWidth="222.0" text="Tạo nhãn mơi" />
    </children>
 </AnchorPane>
