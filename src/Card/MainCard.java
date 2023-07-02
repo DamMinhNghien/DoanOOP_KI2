@@ -543,7 +543,7 @@ public class MainCard {
         }
     }
 
-    public void UpdateLabel(String color, String name, int number, int id) throws SQLException {
+    public void UpdateLabel(String color, String name, int number, int idz) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
             String sql1 = "UPDATE Label SET color=?, LabelName=? WHERE LabelID=? AND Label_The_ID=? AND IDList=?";
@@ -552,7 +552,7 @@ public class MainCard {
             pat.setString(2, name);
             pat.setInt(3, number);
             pat.setInt(4, IDCard);
-            pat.setInt(5, id);
+            pat.setInt(5, idz);
             pat.executeUpdate();
 
         } catch (SQLException ex) {

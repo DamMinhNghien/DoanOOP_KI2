@@ -12,12 +12,10 @@
       <Button fx:id="CloseButton" layoutX="14.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="26.0" prefWidth="44.0" text="Lưu" />
       <Separator layoutX="-7.0" layoutY="135.0" prefHeight="4.0" prefWidth="386.0" />
       <Separator layoutX="7.0" layoutY="34.0" prefHeight="4.0" prefWidth="386.0" />
-      <Separator layoutX="75.0" layoutY="7.0" orientation="VERTICAL" prefHeight="26.0" prefWidth="4.0" />
      
       <TextArea fx:id="textArea" layoutX="4.0" layoutY="38.0" prefHeight="95.0" prefWidth="386.0" />
       <ComboBox fx:id="BoxChoice1" layoutX="9.0" layoutY="7.0" prefHeight="26.0" prefWidth="59.0" promptText="Aa" styleClass="combo-box" stylesheets="@../Css/Style.css" />
-      <CheckBox fx:id="ton1" layoutX="156.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#Ton1" text="In Đậm" />
-      <Separator layoutX="142.0" layoutY="7.0" orientation="VERTICAL" prefHeight="26.0" prefWidth="4.0" />
-      <ComboBox fx:id="BoxChoice2" layoutX="81.0" layoutY="7.0" prefHeight="26.0" prefWidth="59.0" promptText="F" styleClass="combo-box" stylesheets="@../Css/Style.css" />
+      <CheckBox fx:id="ton1" layoutX="71.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#Ton1" text="In Đậm" />
+      <Separator layoutX="68.0" layoutY="7.0" orientation="VERTICAL" prefHeight="26.0" prefWidth="4.0" />
    </children>
 </AnchorPane>

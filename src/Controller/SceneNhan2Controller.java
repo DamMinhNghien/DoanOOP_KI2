@@ -32,6 +32,8 @@ import javafx.stage.Stage;
 public class SceneNhan2Controller implements Initializable {
 
     @FXML
+    private Button GOCOLOR;
+    @FXML
     private Pane ReviewNhan;
     @FXML
     private TextField LabelTieuDe;

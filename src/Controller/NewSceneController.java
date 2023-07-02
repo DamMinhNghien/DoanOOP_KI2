@@ -227,10 +227,11 @@ public class NewSceneController implements Initializable {
                 conn = (Connection) Conection.ConnectionDB.dbConn();
                 String query = "SELECT The.description, Mota_ChiTiet.sizechu, Mota_ChiTiet.isbold "
                         + "FROM Mota_ChiTiet "
-                        + "JOIN The ON Mota_ChiTiet.TheID = The.IDCard "
-                        + "WHERE Mota_ChiTiet.TheID = ?";
+                        + "JOIN The ON Mota_ChiTiet.TheID = The.IDCard AND Mota_ChiTiet.IDList=The.IDList "
+                        + "WHERE Mota_ChiTiet.TheID = ? AND Mota_ChiTiet.IDList=?";
                 PreparedStatement pat = conn.prepareStatement(query);
                 pat.setInt(1, card.IDCard);
+                pat.setInt(2, list.getListID());
                 ResultSet resultSet = pat.executeQuery();
                 while (resultSet.next()) {
                     String description = resultSet.getString("description");
