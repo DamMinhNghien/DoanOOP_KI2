@@ -96,7 +96,7 @@ public class CardController implements Initializable {
             card.IDCard = maxId + 1;
             card.setTitle(text);
             label.setText(card.title);
-            System.out.println(list.getListID());
+
             card.IDTitleDB(card.IDCard, card.title, list.getListID());
             label.setPrefSize(165, 55);
             label.setAlignment(Pos.TOP_LEFT);

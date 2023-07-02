@@ -119,7 +119,7 @@ public class FXMLDocumentController implements Initializable {
             rs = pat.executeQuery();
             if (rs.next()) {
                 int numCards = rs.getInt("NumCards");
-                System.out.println("Number of cards: " + numCards);
+
                 // Tạo các card còn thiếu để đạt đến số lượng mong muốn
                 for (int i = 0; i < numCards; i++) {
                     MainCard newCard = new MainCard();
@@ -218,6 +218,179 @@ public class FXMLDocumentController implements Initializable {
             }
         });
 
+        MenuItem menuItem4 = new MenuItem("Xóa List");
+        menuItem4.setOnAction(event -> {
+            try {
+                list.DeleteList();
+                BangList2.getChildren().remove(vbox);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ;
+        });
+
+        menuButton.getItems().addAll(menuItem1, menuItem4);
+        pane.getChildren().addAll(label, menuButton);
+
+        vbox.getChildren().addAll(pane, listView);
+        BangList2.getChildren().addAll(vbox);
+    }
+
+    @FXML
+    public void ok1() throws IOException, SQLException {
+        List1 list2 = new List1();
+        if (!list2.CheckList()) {
+            TaoList("Cần Làm");
+
+            TaoList("Đang Làm");
+            TaoList("Đã xong");
+
+        } else if (list2.CheckList()) {
+            reTaoList(list2.MaxList());
+        }
+        addscroll(); // Gọi hàm addscroll() ở đây
+
+    }
+
+    public void reTaoList(int p) throws SQLException, IOException {
+        for (int i = 0; i < p + 1; i++) {
+            List1 list = new List1();
+            if (list.CheckListSQL(i)) {
+                int z = i;
+                list.setListID(z);
+                list.setListName(list.SelectName());
+                if (list.getListID() == 0) {
+                    list.setLayoutX(30);
+                } else {
+                    list.setLayoutX(list.SeLectLayoutX());
+
+                }
+
+                VBox vbox = new VBox();
+                vbox.setLayoutX(22.0);
+                vbox.setLayoutY(12.0);
+                vbox.setId("vbox" + i);
+                vbox.setPrefWidth(182.0);
+                vbox.setPrefHeight(454.0);
+                vbox.setLayoutX(list.getLayoutX());
+                vbox.setLayoutY(6);
+                vbox.setStyle(" -fx-border-color:linear-gradient(to top right, #752131, #8825a1);;-fx-border-width: 2px;");
+                Pane pane = new Pane();
+                pane.setPrefWidth(190.0);
+                pane.setPrefHeight(62.0);
+                pane.getStyleClass().add("AnchorPane");
+                pane.getStylesheets().add(getClass().getResource("../Css/Style.css").toExternalForm());
+
+                Label label = new Label(list.getListName());
+
+                label.setLayoutX(22.0);
+                label.setLayoutY(15.0);
+
+                MenuButton menuButton = new MenuButton();
+                menuButton.setLayoutX(141.0);
+                menuButton.setLayoutY(9);
+                menuButton.getStyleClass().add("OKbutton");
+                menuButton.getStylesheets().add(getClass().getResource("../Css/Style.css").toExternalForm());
+
+                MenuItem menuItem1 = new MenuItem("Thêm thẻ");
+                ListView<AnchorPane> listView = new ListView<>();
+                listView.setPrefWidth(183.0);
+                listView.setPrefHeight(442.0);
+                listView.setId(list.getListTable(z));
+                listView.getStylesheets().add(getClass().getResource("../Css/style.css").toExternalForm());
+                menuItem1.setOnAction(event -> {
+                    try {
+                        TaoCard(event, list, listView);
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+
+                MenuItem menuItem4 = new MenuItem("Xóa List");
+                menuItem4.setOnAction(event -> {
+                    try {
+                        list.DeleteList();
+                        BangList2.getChildren().remove(vbox);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+
+                menuButton.getItems().addAll(menuItem1, menuItem4);
+                pane.getChildren().addAll(label, menuButton);
+
+                vbox.getChildren().addAll(pane, listView);
+                BangList2.getChildren().addAll(vbox);
+                ReTaoCard(list, listView);
+            }
+        }
+    }
+
+    @FXML
+    void OKList(MouseEvent event) throws IOException, SQLException {
+        String name = ThemList.getText();
+        TaoList(name);
+
+    }
+
+    public void TaoListz(String name, int id) throws IOException, SQLException {
+//400,122
+
+        List1 list = new List1();
+        list.setListID(id);
+        list.setListName(name);
+        if (list.getListID() == 0) {
+            list.setLayoutX(30);
+        } else {
+            list.setLayoutX(list.MaxLayoutX());
+        }
+
+        list.InsertList(id, name);
+        VBox vbox = new VBox();
+        vbox.setLayoutX(22.0);
+        vbox.setLayoutY(12.0);
+        vbox.setPrefWidth(182.0);
+        vbox.setPrefHeight(454.0);
+        vbox.setLayoutX(list.getLayoutX());
+        vbox.setLayoutY(6);
+        vbox.setStyle(" -fx-border-color:linear-gradient(to top right, #752131, #8825a1);;-fx-border-width: 2px;");
+        Pane pane = new Pane();
+        pane.setPrefWidth(190.0);
+        pane.setPrefHeight(62.0);
+        pane.getStyleClass().add("AnchorPane");
+        pane.getStylesheets().add(getClass().getResource("../Css/Style.css").toExternalForm());
+
+        Label label = new Label(name);
+
+        label.setLayoutX(22.0);
+        label.setLayoutY(15.0);
+
+        MenuButton menuButton = new MenuButton();
+        menuButton.setLayoutX(141.0);
+        menuButton.setLayoutY(9);
+        menuButton.getStyleClass().add("OKbutton");
+        menuButton.getStylesheets().add(getClass().getResource("../Css/Style.css").toExternalForm());
+
+        MenuItem menuItem1 = new MenuItem("Thêm thẻ");
+        ListView<AnchorPane> listView = new ListView<>();
+        listView.setPrefWidth(183.0);
+        listView.setPrefHeight(442.0);
+        listView.setId(list.getListTable(id));
+        listView.getStylesheets().add(getClass().getResource("../Css/style.css").toExternalForm());
+        menuItem1.setOnAction(event -> {
+            try {
+                TaoCard(event, list, listView);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
         MenuItem menuItem2 = new MenuItem("Xóa thẻ");
         menuItem2.setOnAction(event -> {
             // Xử lý hành động cho MenuItem 2
@@ -242,113 +415,6 @@ public class FXMLDocumentController implements Initializable {
 
         vbox.getChildren().addAll(pane, listView);
         BangList2.getChildren().addAll(vbox);
-    }
-
-    @FXML
-    public void ok1() throws IOException, SQLException {
-        List1 list2 = new List1();
-        if (!list2.CheckList()) {
-            TaoList("Cần Làm");
-
-            TaoList("Đang Làm");
-            TaoList("Đã xong");
-            System.out.println("right");
-
-        } else if (list2.CheckList()) {
-            reTaoList(list2.MaxList());
-        }
-        addscroll(); // Gọi hàm addscroll() ở đây
-
-    }
-
-    public void reTaoList(int p) throws SQLException, IOException {
-        for (int i = 0; i < p + 1; i++) {
-            List1 list = new List1();
-            int z = i;
-            list.setListID(z);
-            list.setListName(list.SelectName());
-            if (list.getListID() == 0) {
-                list.setLayoutX(30);
-            } else {
-                list.setLayoutX(list.SeLectLayoutX());
-                System.out.println(list.SeLectLayoutX());
-            }
-            int x = list.getLayoutX();
-            VBox vbox = new VBox();
-            vbox.setLayoutX(22.0);
-            vbox.setLayoutY(12.0);
-            vbox.setId("vbox" + i);
-            vbox.setPrefWidth(182.0);
-            vbox.setPrefHeight(454.0);
-            vbox.setLayoutX(x);
-            vbox.setLayoutY(6);
-            vbox.setStyle(" -fx-border-color:linear-gradient(to top right, #752131, #8825a1);;-fx-border-width: 2px;");
-            Pane pane = new Pane();
-            pane.setPrefWidth(190.0);
-            pane.setPrefHeight(62.0);
-            pane.getStyleClass().add("AnchorPane");
-            pane.getStylesheets().add(getClass().getResource("../Css/Style.css").toExternalForm());
-
-            Label label = new Label(list.getListName());
-
-            label.setLayoutX(22.0);
-            label.setLayoutY(15.0);
-
-            MenuButton menuButton = new MenuButton();
-            menuButton.setLayoutX(141.0);
-            menuButton.setLayoutY(9);
-            menuButton.getStyleClass().add("OKbutton");
-            menuButton.getStylesheets().add(getClass().getResource("../Css/Style.css").toExternalForm());
-
-            MenuItem menuItem1 = new MenuItem("Thêm thẻ");
-            ListView<AnchorPane> listView = new ListView<>();
-            listView.setPrefWidth(183.0);
-            listView.setPrefHeight(442.0);
-            listView.setId(list.getListTable(z));
-            listView.getStylesheets().add(getClass().getResource("../Css/style.css").toExternalForm());
-            menuItem1.setOnAction(event -> {
-                try {
-                    TaoCard(event, list, listView);
-                } catch (IOException ex) {
-                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-
-            MenuItem menuItem2 = new MenuItem("Xóa thẻ");
-            menuItem2.setOnAction(event -> {
-                // Xử lý hành động cho MenuItem 2
-            });
-
-            MenuItem menuItem3 = new MenuItem("Di chuyển thẻ");
-            menuItem3.setOnAction(event -> {
-                // Xử lý hành động cho MenuItem 3
-            });
-            MenuItem menuItem4 = new MenuItem("Xóa List");
-            menuItem4.setOnAction(event -> {
-                try {
-                    list.DeleteList();
-                    BangList2.getChildren().remove(vbox);
-                } catch (SQLException ex) {
-                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-
-            menuButton.getItems().addAll(menuItem1, menuItem2, menuItem3, menuItem4);
-            pane.getChildren().addAll(label, menuButton);
-
-            vbox.getChildren().addAll(pane, listView);
-            BangList2.getChildren().addAll(vbox);
-            ReTaoCard(list, listView);
-        }
-
-    }
-
-    @FXML
-    void OKList(MouseEvent event) throws IOException, SQLException {
-        String name = ThemList.getText();
-        TaoList(name);
     }
 
     public void addscroll() {

@@ -182,7 +182,7 @@
                                        </font>
                                     </Label>
                                     <Button fx:id="show_close_boards" layoutX="65.0" layoutY="425.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="167.0" styleClass="xemcacbangdadong" text="Xem các bảng đã đóng" />
-                                    <Button fx:id="BangDemo_btn" layoutX="247.0" layoutY="278.0" mnemonicParsing="false" onAction="#dantoibang" prefHeight="80.0" prefWidth="169.0" styleClass="btn-bangdemo" stylesheets="@dashboardDesign.css" text="Bảng Demo" textFill="WHITE" />
+                                    <Button fx:id="BangDemo_btn" layoutX="247.0" layoutY="278.0" mnemonicParsing="false" onAction="#dantoibang" prefHeight="80.0" prefWidth="169.0" styleClass="btn-bangdemo" stylesheets="@dashboardDesign.css" text="Đồ án nhóm 8" textFill="WHITE" />
                                     <ComboBox fx:id="sap_xep_theo_btn" layoutX="60.0" layoutY="209.0" prefHeight="31.0" prefWidth="235.0" promptText="Hoạt động gần đây nhất" styleClass="search" stylesheets="@dashboardDesign.css" />
                                     <ComboBox fx:id="Chon_bo_suu_tap_btn" layoutX="308.0" layoutY="209.0" prefHeight="31.0" prefWidth="199.0" promptText="Chọn bộ sưu tập" styleClass="search" stylesheets="@dashboardDesign.css" />
                                  </children>
@@ -356,7 +356,7 @@
                                     <String fx:value="shadown" />
                                  </styleClass>
                                  <children>
-                                    <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="115.0" text="Bảng Demo">
+                                    <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="115.0" text="Đồ án nhóm 8">
                                        <font>
                                           <Font name="Verdana" size="18.0" />
                                        </font>

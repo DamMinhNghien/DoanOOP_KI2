@@ -139,7 +139,7 @@ public class SceneNhanController implements Initializable {
                 newSceneController.PaneLabel(color);
                 cardController.setLabelCard(color);
                 try {
-                    System.out.println(i);
+
                     card.InsertCheckBox(color, i, list.getListID());
                 } catch (SQLException ex) {
                     Logger.getLogger(SceneNhanController.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,7 +199,7 @@ public class SceneNhanController implements Initializable {
 
                 try {
                     sceneNhan2Controller.idd(button.getId(), card.getNewDem(list.getListID()), list);
-                    System.out.println(i);
+
                 } catch (SQLException ex) {
                     Logger.getLogger(SceneNhanController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -304,7 +304,7 @@ public class SceneNhanController implements Initializable {
             LabelCard label1 = new LabelCard();
             card.setLabels(label1);
             card.getLabel(i, list.getListID());
-            System.out.println(card.getLabels().getColor());
+
             label1.setIDDem(i);
             TaoNhan2(label1.getColor(), label1.getName(), i, H, x);
         }
@@ -471,7 +471,7 @@ public class SceneNhanController implements Initializable {
 
                 if (cellObject instanceof HBox) {
                     HBox cell = (HBox) cellObject; // Cast cell sang kiểu HBox
-                    System.out.println(cell.getChildren().size());
+
                     Pane nhan1 = (Pane) cell.getChildren().get(2); // Thay đổi chỉ số 2 nếu cần thiết
                     Label label = (Label) nhan1.getChildren().get(0);
                     // Kiểm tra điều kiện để tìm các cell có label giống nhất

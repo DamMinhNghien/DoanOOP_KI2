@@ -246,4 +246,71 @@ public class List1 {
         }
 
     }
+
+    public boolean CheckListSQL(int id) {
+        boolean hasLabel = false;
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            String sql = "SELECT COUNT(*) as count FROM MyTable WHERE ListID = ?";
+            pat = conn.prepareStatement(sql);
+            pat.setInt(1, id);
+            ResultSet rs = pat.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                if (count > 0) {
+                    hasLabel = true;
+                    System.out.println("Có tồn tại giá trị với ID = " + id + " trong cột 'ListID'.");
+                } else {
+                    System.out.println("Không tồn tại giá trị với ID = " + id + " trong cột 'ListID'.");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (pat != null) {
+                    pat.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return hasLabel;
+
+    }
+
+    public void DeleteCard() throws SQLException {
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            // Chèn dữ liệu vào bảng "The"
+
+            String theQuery4 = "DELETE FROM Label WHERE IDList=? ";
+            pat = conn.prepareStatement(theQuery4);
+            pat.setInt(1, ListID);
+            pat.executeUpdate();
+            String theQuery2 = "DELETE FROM Mota_ChiTiet WHERE IDList=? ";
+            pat = conn.prepareStatement(theQuery2);
+            pat.setInt(1, ListID);
+            pat.executeUpdate();
+            String theQuery3 = "DELETE FROM The WHERE IDList=? ";
+            pat = conn.prepareStatement(theQuery3);
+            pat.setInt(1, ListID);
+            pat.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
