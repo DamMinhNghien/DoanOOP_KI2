@@ -107,14 +107,15 @@ public class MainCard {
     private Connection conn = null;
     private PreparedStatement pat = null;
 
-    public void IDTitleDB(int id, String title) throws SQLException {
+    public void IDTitleDB(int id, String title, int idL) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
 
-            String sql1 = "INSERT INTO The(IDCard,title) VALUES (?,?);";
+            String sql1 = "INSERT INTO The(IDCard,title,IDList) VALUES (?,?,?);";
             pat = conn.prepareStatement(sql1);
             pat.setInt(1, id);
             pat.setString(2, title);
+            pat.setInt(3, idL);
             pat.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,11 +124,12 @@ public class MainCard {
         }
     }
 
-    public int MaxID() throws SQLException {
+    public int MaxID(int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
-            String sql = "SELECT MAX(IDCard) FROM The;";
+            String sql = "SELECT MAX(IDCard) FROM The WHERE IDList=?;";
             pat = conn.prepareStatement(sql);
+            pat.setInt(1, id);
             ResultSet rs = pat.executeQuery();
             int maxId = 0;
             if (rs.next()) {
@@ -142,14 +144,15 @@ public class MainCard {
         return 0;
     }
 
-    public void TitleDB(String title, int id) throws SQLException {
+    public void TitleDB(String title, int id, int idz) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
 
-            String sql1 = "UPDATE The SET title = ? WHERE IDCard = ?;";
+            String sql1 = "UPDATE The SET title = ? WHERE IDCard = ? AND IDList=? ;";
             pat = conn.prepareStatement(sql1);
             pat.setString(1, title);
             pat.setInt(2, id);
+            pat.setInt(3, idz);
             pat.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,13 +161,14 @@ public class MainCard {
         }
     }
 
-    public boolean checkTitle() {
+    public boolean checkTitle(int id) {
         boolean hasTitle = false;
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
-            String sql = "SELECT Title FROM The WHERE IDCard = ?";
+            String sql = "SELECT Title FROM The WHERE IDCard = ? AND IDList=?";
             pat = conn.prepareStatement(sql);
             pat.setInt(1, IDCard);
+            pat.setInt(2, id);
             ResultSet rs = pat.executeQuery();
             if (rs.next()) {
                 this.title = rs.getString("Title");
@@ -190,24 +194,26 @@ public class MainCard {
         return hasTitle;
     }
 
-    public void DesDB() throws SQLException {
+    public void DesDB(int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
             // Chèn dữ liệu vào bảng "The"
-            String theQuery = "UPDATE The SET description = ? WHERE IDCard = ?";
+            String theQuery = "UPDATE The SET description = ? WHERE IDCard = ? AND IDList=?";
             pat = conn.prepareStatement(theQuery);
             pat.setString(1, description.getContent());
             pat.setInt(2, IDCard);
+            pat.setInt(3, id);
             pat.executeUpdate();
 
             // Chèn dữ liệu vào bảng "Mota_ChiTiet"
-            String motaQuery = "INSERT INTO Mota_ChiTiet ( SizeChu, FontChu,TheID,IsBold,ID) VALUES (?,?,?, ?, ?)";
+            String motaQuery = "INSERT INTO Mota_ChiTiet ( SizeChu, FontChu,TheID,IsBold,ID,IDList) VALUES (?,?,?, ?, ?,?)";
             pat = conn.prepareStatement(motaQuery);
             pat.setInt(5, description.getId());
             pat.setInt(3, IDCard);
             pat.setDouble(1, description.getSize());
             pat.setString(2, description.getFont());
             pat.setBoolean(4, description.isInDam());
+            pat.setInt(6, id);
             pat.executeUpdate();
 
         } catch (SQLException e) {
@@ -223,9 +229,11 @@ public class MainCard {
         }
     }
 
-    public int getNewID() throws SQLException {
+    public int getNewID(int id) throws SQLException {
         int newID = 0;
-        try (Connection conn = Conection.ConnectionDB.dbConn(); PreparedStatement stmt = conn.prepareStatement("SELECT MAX(ID) FROM Mota_ChiTiet")) {
+        try (Connection conn = Conection.ConnectionDB.dbConn(); PreparedStatement stmt = conn.prepareStatement("SELECT MAX(ID) FROM Mota_ChiTiet WHERE TheID=? AND IDList=?")) {
+            stmt.setInt(1, IDCard);
+            stmt.setInt(2, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 newID = rs.getInt(1) + 1;
@@ -237,15 +245,15 @@ public class MainCard {
         return newID;
     }
 
-    public void DesDB1() throws SQLException {
+    public void DesDB1(int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
             // Chèn dữ liệu vào bảng "The"
-            String theQuery = "UPDATE The SET description = ? WHERE IDCard = ?";
+            String theQuery = "UPDATE The SET description = ? WHERE IDCard = ? AND IDList=?";
             pat = conn.prepareStatement(theQuery);
             pat.setString(1, description.getContent());
             pat.setInt(2, IDCard);
-
+            pat.setInt(3, id);
             pat.executeUpdate();
 
         } catch (SQLException e) {
@@ -261,17 +269,17 @@ public class MainCard {
         }
     }
 
-    public void UpdateDes() throws SQLException {
+    public void UpdateDes(int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
             // Chèn dữ liệu vào bảng "The"
-            String theQuery = "UPDATE Mota_ChiTiet SET SizeChu=?, FontChu=?, IsBold=? WHERE TheID=?";
+            String theQuery = "UPDATE Mota_ChiTiet SET SizeChu=?, FontChu=?, IsBold=? WHERE TheID=? AND IDList=?";
             pat = conn.prepareStatement(theQuery);
             pat.setDouble(1, description.getSize());
             pat.setString(2, description.getFont());
             pat.setBoolean(3, description.isInDam());
             pat.setInt(4, IDCard);
-
+            pat.setInt(5, id);
             pat.executeUpdate();
 
         } catch (SQLException e) {
@@ -287,13 +295,14 @@ public class MainCard {
         }
     }
 
-    public void Deletedes() throws SQLException {
+    public void Deletedes(int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
             // Chèn dữ liệu vào bảng "The"
-            String theQuery = "DELETE FROM Mota_ChiTiet WHERE TheID=?";
+            String theQuery = "DELETE FROM Mota_ChiTiet WHERE TheID=? AND IDList=?";
             pat = conn.prepareStatement(theQuery);
             pat.setInt(1, IDCard);
+            pat.setInt(2, id);
             pat.executeUpdate();
 
         } catch (SQLException e) {
@@ -309,14 +318,15 @@ public class MainCard {
         }
     }
 
-    public boolean CheckDes() {
+    public boolean CheckDes(int id) {
 
         boolean hasTitle = false;
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
-            String sql = "SELECT description FROM The WHERE IDCard = ?";
+            String sql = "SELECT description FROM The WHERE IDCard = ? AND IDList=?";
             pat = conn.prepareStatement(sql);
             pat.setInt(1, IDCard);
+            pat.setInt(2, id);
             ResultSet rs = pat.executeQuery();
             if (rs.next()) {
                 String description = rs.getString("description");
@@ -345,13 +355,14 @@ public class MainCard {
 
     }
 
-    public boolean CheckLabelDem() {
+    public boolean CheckLabelDem(int id) {
         boolean hasLabel = false;
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
-            String sql = "SELECT Dem FROM The WHERE IDCard = ?";
+            String sql = "SELECT Dem FROM The WHERE IDCard = ? AND IDList=?";
             pat = conn.prepareStatement(sql);
             pat.setInt(1, IDCard);
+            pat.setInt(2, id);
             ResultSet rs = pat.executeQuery();
             if (rs.next()) {
                 Integer Dem = rs.getInt("Dem");
@@ -379,13 +390,14 @@ public class MainCard {
 
     }
 
-    public int getNewDem() throws SQLException {
+    public int getNewDem(int id) throws SQLException {
         int count = 0;
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
-            String query = "SELECT COUNT(LabelID) FROM Label WHERE Label_The_ID=?";
+            String query = "SELECT COUNT(LabelID) FROM Label WHERE Label_The_ID=? AND IDList=?";
             pat = conn.prepareStatement(query);
             pat.setInt(1, IDCard);
+            pat.setInt(2, id);
             ResultSet rs = pat.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
@@ -396,53 +408,15 @@ public class MainCard {
         return count;
     }
 
-    public int getMaxDem() throws SQLException {
-        int MaxDem = 0;
+    public void UpdateDem(int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
             // Chèn dữ liệu vào bảng "The"
-            String theQuery = "SELECT MAX(LabelID) FROM Label WHERE Label_The_ID=? ";
-            pat = conn.prepareStatement(theQuery);
-            pat.setInt(1, IDCard);
-            ResultSet rs = pat.executeQuery();
-            if (rs.next()) {
-                MaxDem = rs.getInt(1) + 1;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
-        }
-        return MaxDem;
-    }
-
-    public int getMinDem() throws SQLException {
-        int MinDem = 0;
-        try {
-            conn = (Connection) Conection.ConnectionDB.dbConn();
-            // Chèn dữ liệu vào bảng "The"
-            String theQuery = "SELECT MIN(LabelID) FROM Label WHERE Label_The_ID=?";
-            pat = conn.prepareStatement(theQuery);
-            pat.setInt(1, IDCard);
-            ResultSet rs = pat.executeQuery();
-            if (rs.next()) {
-                MinDem = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
-        }
-        return MinDem;
-    }
-
-    public void UpdateDem() throws SQLException {
-        try {
-            conn = (Connection) Conection.ConnectionDB.dbConn();
-            // Chèn dữ liệu vào bảng "The"
-            String theQuery = "UPDATE The SET Dem = ? WHERE IDCard = ?";
+            String theQuery = "UPDATE The SET Dem = ? WHERE IDCard = ? AND IDList=?";
             pat = conn.prepareStatement(theQuery);
             pat.setInt(1, 1);
             pat.setInt(2, IDCard);
-
+            pat.setInt(3, id);
             pat.executeUpdate();
 
         } catch (SQLException e) {
@@ -458,17 +432,18 @@ public class MainCard {
         }
     }
 
-    public void InsertLabel() throws SQLException {
+    public void InsertLabel(int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
 
-            String sql1 = "INSERT INTO Label(labelID,Label_The_ID,color,LabelName,CheckBox) VALUES (?,?,?,?,?);";
+            String sql1 = "INSERT INTO Label(labelID,Label_The_ID,color,LabelName,CheckBox,IDList) VALUES (?,?,?,?,?,?);";
             pat = conn.prepareStatement(sql1);
             pat.setInt(1, labels.getIDDem());
             pat.setInt(2, IDCard);
             pat.setString(3, labels.getColor());
             pat.setString(4, labels.getName());
             pat.setString(5, "khong");
+            pat.setInt(6, id);
             pat.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -477,13 +452,14 @@ public class MainCard {
         }
     }
 
-    public void getLabel(int number) throws SQLException {
+    public void getLabel(int number, int id) throws SQLException {
         try {
             conn = Conection.ConnectionDB.dbConn();
-            String sql1 = ("SELECT color, LabelName FROM Label WHERE LabelID = ? AND Label_The_ID = ?");
+            String sql1 = ("SELECT color, LabelName FROM Label WHERE LabelID = ? AND Label_The_ID = ? AND IDList=?");
             pat = conn.prepareStatement(sql1);
             pat.setInt(1, number);
             pat.setInt(2, IDCard);
+            pat.setInt(3, id);
             ResultSet rs = pat.executeQuery();
             while (rs.next()) {
                 labels.setColor(rs.getString("color"));
@@ -496,14 +472,15 @@ public class MainCard {
         }
     }
 
-    public void InsertCheckBox(String color, int number) throws SQLException {
+    public void InsertCheckBox(String color, int number, int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
-            String sql1 = "UPDATE Label SET CheckBox=? WHERE LabelID=? AND Label_The_ID=? ";
+            String sql1 = "UPDATE Label SET CheckBox=? WHERE LabelID=? AND Label_The_ID=? AND IDList=?";
             pat = conn.prepareStatement(sql1);
             pat.setString(1, color);
             pat.setInt(2, number);
             pat.setInt(3, IDCard);
+            pat.setInt(4, id);
             pat.executeUpdate();
 
         } catch (SQLException ex) {
@@ -513,13 +490,14 @@ public class MainCard {
         }
     }
 
-    public String getLabelColor() {
+    public String getLabelColor(int id) {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
-            String sql = "SELECT CheckBox FROM Label WHERE Label_The_ID=?  AND CheckBox <> ?";
+            String sql = "SELECT CheckBox FROM Label WHERE Label_The_ID=? AND IDList=? AND CheckBox <> ?";
             pat = conn.prepareStatement(sql);
             pat.setInt(1, IDCard);
-            pat.setString(2, "khong");
+            pat.setInt(2, id);
+            pat.setString(3, "khong");
             ResultSet rs = pat.executeQuery();
             if (rs.next()) {
                 String checkbox = rs.getString("CheckBox");
@@ -547,14 +525,15 @@ public class MainCard {
 
     }
 
-    public void UnCheckBox(String color, int number) throws SQLException {
+    public void UnCheckBox(String color, int number, int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
-            String sql1 = "UPDATE Label SET CheckBox=? WHERE LabelID=? AND Label_The_ID=?";
+            String sql1 = "UPDATE Label SET CheckBox=? WHERE LabelID=? AND Label_The_ID=? AND IDList=?";
             pat = conn.prepareStatement(sql1);
             pat.setString(1, "khong");
             pat.setInt(2, number);
             pat.setInt(3, IDCard);
+            pat.setInt(4, id);
             pat.executeUpdate();
 
         } catch (SQLException ex) {
@@ -564,15 +543,16 @@ public class MainCard {
         }
     }
 
-    public void UpdateLabel(String color, String name, int number) throws SQLException {
+    public void UpdateLabel(String color, String name, int number, int id) throws SQLException {
         try {
             conn = (Connection) Conection.ConnectionDB.dbConn();
-            String sql1 = "UPDATE Label SET color=?, LabelName=? WHERE LabelID=? AND Label_The_ID=? ";
+            String sql1 = "UPDATE Label SET color=?, LabelName=? WHERE LabelID=? AND Label_The_ID=? AND IDList=?";
             pat = conn.prepareStatement(sql1);
             pat.setString(1, color);
             pat.setString(2, name);
             pat.setInt(3, number);
             pat.setInt(4, IDCard);
+            pat.setInt(5, id);
             pat.executeUpdate();
 
         } catch (SQLException ex) {

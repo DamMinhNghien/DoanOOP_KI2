@@ -5,6 +5,7 @@
 package Controller;
 
 import Card.MainCard;
+import List.List1;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
@@ -77,6 +78,11 @@ public class NewSceneController implements Initializable {
     private Pane PaneDes;
     @FXML
     private AnchorPane CardPane3;
+    private List1 list;
+
+    public void setList(List1 list) {
+        this.list = list;
+    }
 
     public void PaneLabel(String myColor) {
 
@@ -94,11 +100,11 @@ public class NewSceneController implements Initializable {
     }
 
     public void rePaneLabel() {
-        if (!card.getLabelColor().equals("khong")) {
+        if (!card.getLabelColor(list.getListID()).equals("khong")) {
             paneLabel.setPrefSize(40, 25);
             paneLabel.setLayoutX(52);
             paneLabel.setLayoutY(90);
-            paneLabel.setStyle(" -fx-background-color: " + card.getLabelColor() + ";");
+            paneLabel.setStyle(" -fx-background-color: " + card.getLabelColor(list.getListID()) + ";");
             CardPane3.getChildren().add(paneLabel);
         }
     }
@@ -167,7 +173,7 @@ public class NewSceneController implements Initializable {
         if (!TextField2.getText().isEmpty()) {
             dataLabel.setText(TextField2.getText());
             try {
-                card.TitleDB(TextField2.getText(), card.IDCard);
+                card.TitleDB(TextField2.getText(), card.IDCard, list.getListID());
             } catch (SQLException ex) {
                 Logger.getLogger(NewSceneController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -215,7 +221,7 @@ public class NewSceneController implements Initializable {
     }
 
     public void ReDes(MainCard card) throws SQLException {
-        if (card.CheckDes()) {
+        if (card.CheckDes(list.getListID())) {
             try {
 
                 conn = (Connection) Conection.ConnectionDB.dbConn();
@@ -340,6 +346,7 @@ public class NewSceneController implements Initializable {
         newStage.setX(488);
         newStage.setY(263);
         SceneDesController sceneDesController = loader.getController();
+        sceneDesController.setList(list);
         sceneDesController.setNewSceneController(this);
         sceneDesController.setCard(card);
         sceneDesController.setTextArea(labeldes);
@@ -367,8 +374,10 @@ public class NewSceneController implements Initializable {
         newStage.setX(488);
         newStage.setY(263);
         SceneDesController sceneDesController = loader.getController();
+        sceneDesController.setList(list);
         sceneDesController.setNewSceneController(this);
         sceneDesController.setCard(card);
+
         newStage.setOnCloseRequest(event -> {
             event.consume();
         });
@@ -417,9 +426,10 @@ public class NewSceneController implements Initializable {
         Scene newScene = new Scene(newScenePane);
         newStage.setScene(newScene);
         SceneNhanController sceneNhanController = loader.getController();
+        sceneNhanController.setList(list);
         sceneNhanController.setNewSceneController(this);
         sceneNhanController.setCard(card);
-        sceneNhanController.Tao5Nhan(card.CheckLabelDem(), card.getNewDem(), card.getLabelColor());
+        sceneNhanController.Tao5Nhan(card.CheckLabelDem(list.getListID()), card.getNewDem(list.getListID()), card.getLabelColor(list.getListID()));
         sceneNhanController.setCardController(cardController);
 
         newStage.showAndWait();

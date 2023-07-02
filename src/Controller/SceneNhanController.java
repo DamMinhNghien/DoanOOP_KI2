@@ -38,6 +38,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import List.List1;
 
 /**
  * FXML Controller class
@@ -59,7 +60,11 @@ public class SceneNhanController implements Initializable {
     private ListView ViewNhan;
     @FXML
     private Button NewNhan;
+    private List1 list;
 
+    public void setList(List1 list) {
+        this.list = list;
+    }
     @FXML
     private AnchorPane PaneNhan;
     List<CheckBox> checkBoxList = new ArrayList<>();
@@ -74,12 +79,13 @@ public class SceneNhanController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         SceneNhan2Controller sceneNhan2Controller = loader.getController();
+        sceneNhan2Controller.setList(list);
         sceneNhan2Controller.setSceneNhanController(this);
         sceneNhan2Controller.setCard(card);
         sceneNhan2Controller.setCardController(cardController);
         sceneNhan2Controller.setNewSceneController(newSceneController);
-        int x = card.getNewDem();
-        sceneNhan2Controller.idd("button" + 0, x);
+        int x = card.getNewDem(list.getListID());
+        sceneNhan2Controller.idd("button" + 0, x, list);
         stage.show();
     }
 
@@ -101,7 +107,7 @@ public class SceneNhanController implements Initializable {
         label.setIDDem(i);
         label.setName(name);
         card.setLabels(label);
-        card.InsertLabel();
+        card.InsertLabel(list.getListID());
     }
 
     public void TaoNhan(String color, String name, int i, String H) throws SQLException {
@@ -112,7 +118,7 @@ public class SceneNhanController implements Initializable {
         label.setIDDem(i);
         label.setName(name);
         card.setLabels(label);
-        card.InsertLabel();
+        card.InsertLabel(list.getListID());
         HBox hbox = new HBox();
         hbox.setPrefSize(246, 60);
         // Thêm các phần tử vào HBox
@@ -134,7 +140,7 @@ public class SceneNhanController implements Initializable {
                 cardController.setLabelCard(color);
                 try {
                     System.out.println(i);
-                    card.InsertCheckBox(color, i);
+                    card.InsertCheckBox(color, i, list.getListID());
                 } catch (SQLException ex) {
                     Logger.getLogger(SceneNhanController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -149,7 +155,7 @@ public class SceneNhanController implements Initializable {
                 }
                 checkBox.setDisable(false);
                 try {
-                    card.UnCheckBox(color, i);
+                    card.UnCheckBox(color, i, list.getListID());
                 } catch (SQLException ex) {
                     Logger.getLogger(SceneNhanController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -184,6 +190,7 @@ public class SceneNhanController implements Initializable {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 SceneNhan2Controller sceneNhan2Controller = loader.getController();
+                sceneNhan2Controller.setList(list);
                 sceneNhan2Controller.setSceneNhanController(this);
                 sceneNhan2Controller.setCard(card);
                 sceneNhan2Controller.setNewSceneController(newSceneController);
@@ -191,7 +198,7 @@ public class SceneNhanController implements Initializable {
                 sceneNhan2Controller.setTextField(name);
 
                 try {
-                    sceneNhan2Controller.idd(button.getId(), card.getNewDem());
+                    sceneNhan2Controller.idd(button.getId(), card.getNewDem(list.getListID()), list);
                     System.out.println(i);
                 } catch (SQLException ex) {
                     Logger.getLogger(SceneNhanController.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,13 +285,13 @@ public class SceneNhanController implements Initializable {
             TaoNhan("purple", "", x + 3, H);
             TaoNhan("yellow", "", x + 4, H);
             TaoNhan("brown", "", x + 5, H);
-            card.UpdateDem();
+            card.UpdateDem(list.getListID());
         } else if (!Y) {
 
             for (int i = 1; i < x + 1; i++) {
                 LabelCard label1 = new LabelCard();
                 card.setLabels(label1);
-                card.getLabel(i);
+                card.getLabel(i, list.getListID());
                 label1.setIDDem(i);
                 TaoNhan2(label1.getColor(), label1.getName(), i, H, x);
             }
@@ -292,11 +299,11 @@ public class SceneNhanController implements Initializable {
 
     }
 
-    public void reLabel(int x, String H) throws SQLException {
+    public void reLabel(int x, String H, List1 list) throws SQLException {
         for (int i = 1; i < x + 1; i++) {
             LabelCard label1 = new LabelCard();
             card.setLabels(label1);
-            card.getLabel(i);
+            card.getLabel(i, list.getListID());
             System.out.println(card.getLabels().getColor());
             label1.setIDDem(i);
             TaoNhan2(label1.getColor(), label1.getName(), i, H, x);
@@ -327,7 +334,7 @@ public class SceneNhanController implements Initializable {
                 cardController.setLabelCard(color);
                 try {
 
-                    card.InsertCheckBox(color, i);
+                    card.InsertCheckBox(color, i, list.getListID());
                 } catch (SQLException ex) {
                     Logger.getLogger(SceneNhanController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -342,7 +349,7 @@ public class SceneNhanController implements Initializable {
                 }
                 checkBox.setDisable(false);
                 try {
-                    card.UnCheckBox(color, i);
+                    card.UnCheckBox(color, i, list.getListID());
                 } catch (SQLException ex) {
                     Logger.getLogger(SceneNhanController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -377,12 +384,13 @@ public class SceneNhanController implements Initializable {
                 stage.setScene(scene);
                 SceneNhan2Controller sceneNhan2Controller = loader.getController();
                 sceneNhan2Controller.setSceneNhanController(this);
+                sceneNhan2Controller.setList(list);
                 sceneNhan2Controller.setCard(card);
                 sceneNhan2Controller.setNewSceneController(newSceneController);
                 sceneNhan2Controller.setCardController(cardController);
                 sceneNhan2Controller.setTextField(name);
                 try {
-                    sceneNhan2Controller.idd(button.getId(), x);
+                    sceneNhan2Controller.idd(button.getId(), x, list);
                 } catch (SQLException ex) {
                     Logger.getLogger(SceneNhanController.class.getName()).log(Level.SEVERE, null, ex);
                 }

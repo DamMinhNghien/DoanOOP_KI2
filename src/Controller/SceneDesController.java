@@ -6,6 +6,7 @@ package Controller;
 
 import Card.Description;
 import Card.MainCard;
+import List.List1;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,6 +61,11 @@ public class SceneDesController implements Initializable {
     public void setCard(MainCard card) {
         this.card = card;
     }
+    private List1 list;
+
+    public void setList(List1 list) {
+        this.list = list;
+    }
 
     @FXML
 
@@ -67,15 +73,15 @@ public class SceneDesController implements Initializable {
 
         if (textArea.getText().isEmpty()) {
             newSceneController.panevi1();
-            Description description = new Description(card.getNewID(), labeldes.getText(), 0, "", InDam);
+            Description description = new Description(card.getNewID(list.getListID()), labeldes.getText(), 0, "", InDam);
             card.setDescription(description);
-            card.DesDB1();
+            card.DesDB1(list.getListID());
             newSceneController.setIconText();
-            card.Deletedes();
+            card.Deletedes(list.getListID());
             newSceneController.setChinhSua1();
         } else {
 
-            if (card.CheckDes()) {
+            if (card.CheckDes(list.getListID())) {
                 newSceneController.panevi();
                 double lineheight = textArea.getFont().getSize() * 1.5;
                 double linecount = textArea.getText().split("\n").length;
@@ -85,12 +91,12 @@ public class SceneDesController implements Initializable {
                 labeldes.setFont(textArea.getFont());
                 labeldes.setPrefSize(378, labeldesheight);
                 newSceneController.setLabeldes(labeldes);
-                Description description = new Description(card.getNewID(), labeldes.getText(), textArea.getFont().getSize(), "", InDam);
+                Description description = new Description(card.getNewID(list.getListID()), labeldes.getText(), textArea.getFont().getSize(), "", InDam);
                 card.setDescription(description);
-                card.DesDB1();
-                card.UpdateDes();
+                card.DesDB1(list.getListID());
+                card.UpdateDes(list.getListID());
 
-            } else if (!card.CheckDes()) {
+            } else if (!card.CheckDes(list.getListID())) {
 
                 newSceneController.panevi();
                 double lineheight = textArea.getFont().getSize() * 1.5;
@@ -102,10 +108,10 @@ public class SceneDesController implements Initializable {
                 labeldes.setFont(textArea.getFont());
                 labeldes.setPrefSize(378, labeldesheight);
                 newSceneController.setLabeldes(labeldes);
-                Description description = new Description(card.getNewID(), labeldes.getText(), textArea.getFont().getSize(), "", InDam);
+                Description description = new Description(card.getNewID(list.getListID()), labeldes.getText(), textArea.getFont().getSize(), "", InDam);
                 card.setDescription(description);
-                card.DesDB1();
-                card.DesDB();
+                card.DesDB1(list.getListID());
+                card.DesDB(list.getListID());
 
             }
             newSceneController.setviChinhSua();

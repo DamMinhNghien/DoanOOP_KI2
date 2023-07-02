@@ -5,6 +5,7 @@
 package Controller;
 
 import Card.MainCard;
+import List.List1;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -49,6 +50,12 @@ public class SceneNhan2Controller implements Initializable {
     private int p10 = 2;
     private int p11 = 2;
     private int p12 = 2;
+
+    private List1 list;
+
+    public void setList(List1 list) {
+        this.list = list;
+    }
 
     @FXML
     private Pane PickColor1;
@@ -161,47 +168,50 @@ public class SceneNhan2Controller implements Initializable {
 
             for (int i = 1; i < x + 1; i++) {
                 card.getLabels().setIDDem(i);
-                card.getLabel(card.getLabels().getIDDem());
+                card.getLabel(card.getLabels().getIDDem(), list.getListID());
                 if (!backgournColor2.equals(card.getLabels().getColor()) && k == i) {
-                    card.UpdateLabel(backgournColor2, LabelTieuDe.getText(), i);
+                    card.UpdateLabel(backgournColor2, LabelTieuDe.getText(), i, list.getListID());
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneNhan.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     SceneNhanController sceneNhanController = loader.getController();
+                    sceneNhanController.setList(list);
                     sceneNhanController.setCard(card);
                     sceneNhanController.setNewSceneController(newSceneController);
                     sceneNhanController.setCardController(cardController);
-                    sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
+                    sceneNhanController.reLabel(card.getNewDem(list.getListID()), card.getLabelColor(list.getListID()), list);
                     stage.show();
                 }
                 if (backgournColor2.equals(card.getLabels().getColor()) && k == i) {
-                    card.UpdateLabel(backgournColor2, LabelTieuDe.getText(), i);
+                    card.UpdateLabel(backgournColor2, LabelTieuDe.getText(), i, list.getListID());
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneNhan.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     SceneNhanController sceneNhanController = loader.getController();
+                    sceneNhanController.setList(list);
                     sceneNhanController.setCard(card);
                     sceneNhanController.setNewSceneController(newSceneController);
                     sceneNhanController.setCardController(cardController);
-                    sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
+                    sceneNhanController.reLabel(card.getNewDem(list.getListID()), card.getLabelColor(list.getListID()), list);
                     stage.show();
                 }
                 if (backgournColor2.equals(card.getLabels().getColor())) {
-                    card.UpdateLabel(backgournColor2, LabelTieuDe.getText(), i);
+                    card.UpdateLabel(backgournColor2, LabelTieuDe.getText(), i, list.getListID());
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneNhan.fxml"));
                     Parent root = loader.load();
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     SceneNhanController sceneNhanController = loader.getController();
+                    sceneNhanController.setList(list);
                     sceneNhanController.setCard(card);
                     sceneNhanController.setNewSceneController(newSceneController);
                     sceneNhanController.setCardController(cardController);
-                    sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
+                    sceneNhanController.reLabel(card.getNewDem(list.getListID()), card.getLabelColor(list.getListID()), list);
                     stage.show();
                 }
             }
@@ -212,11 +222,12 @@ public class SceneNhan2Controller implements Initializable {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 SceneNhanController sceneNhanController = loader.getController();
+                sceneNhanController.setList(list);
                 sceneNhanController.setCard(card);
                 sceneNhanController.setNewSceneController(newSceneController);
                 sceneNhanController.setCardController(cardController);
-                sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
-                sceneNhanController.TaoNhan2(backgournColor2, LabelTieuDe.getText(), x + 1, card.getLabelColor(), x + 2);
+                sceneNhanController.reLabel(card.getNewDem(list.getListID()), card.getLabelColor(list.getListID()), list);
+                sceneNhanController.TaoNhan2(backgournColor2, LabelTieuDe.getText(), x + 1, card.getLabelColor(list.getListID()), x + 2);
                 sceneNhanController.insertLabel(backgournColor2, x + 1, LabelTieuDe.getText());
                 stage.show();
 
@@ -226,7 +237,7 @@ public class SceneNhan2Controller implements Initializable {
 
     }
 
-    public void idd(String id, int x) throws SQLException {
+    public void idd(String id, int x, List1 list) throws SQLException {
         setX(x);
         idd = id.substring(id.lastIndexOf("button") + "button".length());
 
@@ -234,7 +245,7 @@ public class SceneNhan2Controller implements Initializable {
             if (Integer.parseInt(idd) == i) {
                 card.getLabels().setIDDem(Integer.parseInt(idd));
                 setK(Integer.parseInt(idd));
-                card.getLabel(card.getLabels().getIDDem());
+                card.getLabel(card.getLabels().getIDDem(), list.getListID());
                 if (card.getLabels().getColor().equals("blue")) {
                     PickColor1.setStyle("-fx-background-color: blue;-fx-border-width: 4px;; -fx-border-color: black;");
                     p1 = 1;
@@ -330,7 +341,7 @@ public class SceneNhan2Controller implements Initializable {
                 }
             } else {
                 card.getLabels().setIDDem(i);
-                card.getLabel(i);
+                card.getLabel(i, list.getListID());
                 if (card.getLabels().getColor().equals("blue")) {
                     PickColor1.setStyle("-fx-background-color: blue; -fx-border-width: 6px 0 0 0;-fx-border-color: black;");
                     p1 = 3;
@@ -404,10 +415,12 @@ public class SceneNhan2Controller implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         SceneNhanController sceneNhanController = loader.getController();
+        sceneNhanController.setList(list);
         sceneNhanController.setCard(card);
+
         sceneNhanController.setNewSceneController(newSceneController);
         sceneNhanController.setCardController(cardController);
-        sceneNhanController.reLabel(card.getNewDem(), card.getLabelColor());
+        sceneNhanController.reLabel(card.getNewDem(list.getListID()), card.getLabelColor(list.getListID()), list);
         stage.show();
     }
 

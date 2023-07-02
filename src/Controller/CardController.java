@@ -5,6 +5,7 @@
 package Controller;
 
 import Card.MainCard;
+import List.List1;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -52,8 +53,14 @@ public class CardController implements Initializable {
     @FXML
     private TextField TextField1;
 
+    private List1 list;
+
     public void setCard(MainCard card) {
         this.card = card;
+    }
+
+    public void setList(List1 list) {
+        this.list = list;
     }
 
     public void setLabelCard(String myColor) {
@@ -71,11 +78,11 @@ public class CardController implements Initializable {
     }
 
     public void reSetLabelCard() {
-        if (!card.getLabelColor().equals("khong")) {
+        if (!card.getLabelColor(list.getListID()).equals("khong")) {
             paneLabel.setPrefSize(35, 10);
             paneLabel.setLayoutX(6);
             paneLabel.setLayoutY(26);
-            paneLabel.setStyle(" -fx-background-color: " + card.getLabelColor() + "; -fx-background-radius: 5px;");
+            paneLabel.setStyle(" -fx-background-color: " + card.getLabelColor(list.getListID()) + "; -fx-background-radius: 5px;");
             CardPane.getChildren().add(paneLabel);
         }
     }
@@ -85,11 +92,12 @@ public class CardController implements Initializable {
         String text = TextField1.getText();
 
         if (!text.isEmpty()) {
-            int maxId = card.MaxID();
+            int maxId = card.MaxID(list.getListID());
             card.IDCard = maxId + 1;
             card.setTitle(text);
             label.setText(card.title);
-            card.IDTitleDB(card.IDCard, card.title);
+            System.out.println(list.getListID());
+            card.IDTitleDB(card.IDCard, card.title, list.getListID());
             label.setPrefSize(165, 55);
             label.setAlignment(Pos.TOP_LEFT);
             label.setLayoutX(5);
@@ -111,7 +119,7 @@ public class CardController implements Initializable {
     }
 
     public void UpTitleDB() {
-        if (card.checkTitle() == true) {
+        if (card.checkTitle(list.getListID()) == true) {
             label.setText(card.title);
             label.setPrefSize(165, 55);
             label.setAlignment(Pos.TOP_LEFT);
@@ -126,7 +134,7 @@ public class CardController implements Initializable {
     }
 
     public void newscene(MouseEvent e) throws IOException, SQLException {
-        if (!card.checkTitle()) {
+        if (!card.checkTitle(list.getListID())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Lỗi");
             alert.setHeaderText(null);
@@ -135,9 +143,11 @@ public class CardController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/newScene.fxml"));
             AnchorPane newScenePane = loader.load();
             NewSceneController newSceneController = loader.getController();
+            newSceneController.setList(list);
             newSceneController.setCard(card);
             newSceneController.ReDes(card);
             newSceneController.rePaneLabel();
+
             String labelText = label.getText();
             newSceneController.setLabelText(labelText);
             newSceneController.setCardController(this);

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package WMS;
 
+import Controller.FXMLDocumentController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -36,6 +32,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -497,7 +494,7 @@ public class adminDashboardController implements Initializable {
 
     }
 
-    public void dantoibang(ActionEvent event) throws IOException {
+    public void dantoibang(ActionEvent event) throws IOException, SQLException {
 //    if (event.getSource()== BangDemo_btn){
 //        board_form.setVisible(false);
 //        employees_form.setVisible(false);
@@ -508,7 +505,12 @@ public class adminDashboardController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/FXMLDocument.fxml"));
         Parent root = loader.load();
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLDocumentController fXMLDocumentController = loader.getController();
+        fXMLDocumentController.setAdminDashboardController(this);
+        fXMLDocumentController.ok1();
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("../image/trello.png")));

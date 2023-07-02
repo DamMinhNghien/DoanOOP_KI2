@@ -99,7 +99,7 @@ public class FXMLController implements Initializable {
 
                 if (result.next()) {
                     //hide Login form
-                    getData.username = admin_username.getText();
+                    extractAdminName(admin_username.getText());
 
                     alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Information Message");
@@ -119,7 +119,7 @@ public class FXMLController implements Initializable {
                     root.setOnMouseDragged((MouseEvent event) -> {
                         stage.setX(event.getScreenX() - x);
                         stage.setY(event.getScreenY() - y);
-                        stage.setOpacity(.8);
+
                     });
                     stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
@@ -140,9 +140,95 @@ public class FXMLController implements Initializable {
         }
     }
 
+    public void extractAdminName(String adminId) {
+        String query = "SELECT id FROM admin WHERE username = ?";
+        Connection connection = ConnectionDB.connectDb();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, adminId);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String id = resultSet.getString("id");
+
+                member memberObject = new member(id, adminId);
+                System.out.println("ID: " + memberObject.getid());
+                System.out.println("Name: " + memberObject.getName());
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText(null);
+                alert.setContentText("No employee found with the given ID.");
+                alert.showAndWait();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void extractLastName(String employeeId) {
+        String query = "SELECT lastName FROM employee WHERE employee_id = ?";
+        Connection connection = ConnectionDB.connectDb();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, employeeId);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String lastName = resultSet.getString("lastName");
+
+                member memberObject = new member(employeeId, lastName);
+                System.out.println("ID: " + memberObject.getid());
+                System.out.println("Name: " + memberObject.getName());
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText(null);
+                alert.setContentText("No employee found with the given ID.");
+                alert.showAndWait();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void employeeLogin() {
 
-        String employeeData = "SELECT * FROM employee WHERE employee_id = ? and password = ?";
+        String employeeData = "SELECT * FROM employee WHERE employee_id = ? and password = ? ";
         connect = ConnectionDB.connectDb();
 
         try {
@@ -164,6 +250,9 @@ public class FXMLController implements Initializable {
                 result = prepare.executeQuery();
 
                 if (result.next()) {
+
+                    extractLastName(employee_id.getText());
+
                     //hide Login form
                     alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Information Message");
@@ -202,6 +291,7 @@ public class FXMLController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void switchForm(ActionEvent event) {
@@ -222,4 +312,5 @@ public class FXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+
 }
